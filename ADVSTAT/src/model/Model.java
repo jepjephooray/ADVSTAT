@@ -155,12 +155,12 @@ public class Model {
 		return sampleTable;
 	}
 	
-	public Hashtable<String, Integer> getPopulationFrequencyTable() {
-		Hashtable<String, Integer> frequencyTable = new Hashtable<String, Integer>();
+	public Hashtable<String, Double> getPopulationFrequencyTable() {
+		Hashtable<String, Double> frequencyTable = new Hashtable<String, Double>();
 		
 		for (int i = 0; i < getSortedPopulationData().size(); i++) {
 			String key = Double.toString(population.getData().get(i));
-			Integer value = (frequencyTable.containsKey(key) ? frequencyTable.get(key) + 1 : 1);
+			Double value = (frequencyTable.containsKey(key) ? frequencyTable.get(key) + 1 : 1);
 			frequencyTable.put(key, value);
 		}
 		

@@ -1,5 +1,8 @@
 package controller;
 
+import java.util.Enumeration;
+import java.util.Hashtable;
+
 import model.Model;
 import view.Parameters;
 import view.GraphUpdateEvent;
@@ -28,9 +31,17 @@ public class Controller2 implements GraphUpdateListener {
 		data[0] = new double[p.getMaximum()];
 		
 		// compute for all x
-		for(int x = 0; x < p.getMaximum(); x++) {
+	//	for(int x = 0; x < p.getMaximum(); x++) {
 	//		model.calculateHypergeometricDist(x+1, p.getBigN(), p.getSmallN(), p.getK());
 	//		data[0][x] = model.getProbability();
+	//	}
+		Hashtable<String, Double> frequencyTable = this.model.getPopulationFrequencyTable();
+		Enumeration<String> keys = frequencyTable.keys();
+		
+		String currentKey;
+		while ((currentKey = keys.nextElement()) != null){
+			Double frequency = frequencyTable.get(currentKey);
+			
 		}
 		
 		// update
