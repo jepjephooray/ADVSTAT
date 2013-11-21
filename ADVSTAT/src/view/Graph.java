@@ -12,6 +12,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
@@ -41,6 +42,8 @@ public class Graph extends JPanel{
 	private JTextField txtUpperB;
 	private JTextField txtLowerB;
 	private JLabel lblgivenX;
+	private JComboBox<String> cmbxType;
+	
 	
 	private JButton btnCalculate;
 	private Component lblError;
@@ -159,6 +162,13 @@ public class Graph extends JPanel{
 		txtUpperB = new JTextField("");
 		txtUpperB.setPreferredSize(txtSize);
 		
+		cmbxType = new JComboBox<String>();
+		cmbxType.addItem("Normal");
+		cmbxType.addItem("Bimodial");
+		cmbxType.addItem("Skewed");
+		cmbxType.addItem("Uniform");
+		cmbxType.addItem("Random");
+		
 		JLabel lbln = new JLabel("n");
 		lbln.setPreferredSize(lblSize);
 		
@@ -178,7 +188,8 @@ public class Graph extends JPanel{
 		btnCalculate = new JButton("Generate");
 		btnCalculate.setBorder(BorderFactory.createEtchedBorder());
 		btnCalculate.setPreferredSize(btnSize);
-				
+		
+		JLabel lblType = new JLabel("Type");
 		
 		fieldContainer.add(lblN);
 		fieldContainer.add(txtN);
@@ -196,6 +207,9 @@ public class Graph extends JPanel{
 		fieldContainer.add(lblUp);
 		fieldContainer.add(txtUpperB);
 	
+		fieldContainer.add(lblType);
+		fieldContainer.add(cmbxType);
+		
 		lblError = new JLabel("");
 		lblError.setForeground(Color.red);
 		
