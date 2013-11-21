@@ -112,7 +112,8 @@ public class View extends JFrame implements ChangeListener, KeyListener{
 		try {
 			graph.clearErrors();
 			int n = graph.getn(src);
-			int k = graph.getk();
+			int u = graph.getUpperB();
+			int l = graph.getLowerB();
 			int N = Graph.MAX_N = graph.getN();
 			if (graph.shouldDisplayGraph()){
 				
@@ -120,7 +121,7 @@ public class View extends JFrame implements ChangeListener, KeyListener{
 					graph.setMaximumK(N);
 				}
 				
-				Parameters newParam = new Parameters(n, N, k, graph.getMinimumK(), graph.getMaximumK());
+				Parameters newParam = new Parameters(n, N, u, l, graph.getMinimumK(), graph.getMaximumK());
 				
 				listener.updatePerformed(new GraphUpdateEvent(src, newParam));
 			}

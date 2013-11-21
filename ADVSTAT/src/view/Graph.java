@@ -38,7 +38,8 @@ public class Graph extends JPanel{
 	
 	private JTextField txtn;
 	private JTextField txtN;
-	private JTextField txtK;
+	private JTextField txtUpperB;
+	private JTextField txtLowerB;
 	private JLabel lblgivenX;
 	
 	private JButton btnCalculate;
@@ -60,9 +61,9 @@ public class Graph extends JPanel{
 	
 	private JFreeChart createChart(final CategoryDataset dataset){
 		   final JFreeChart chart = ChartFactory.createAreaChart(
-		            "Hypergeometric Probability Distribution",    // chart title
-		            "Random variable X",               // domain axis label
-		            "Probability",                  // range axis label
+		            "Population Distribution",    // chart title
+		            "N",               // domain axis label
+		            "Frequency",                  // range axis label
 		            dataset,                  // data
 		            PlotOrientation.VERTICAL, // orientation
 		            false,                     // include legend
@@ -143,6 +144,7 @@ public class Graph extends JPanel{
 		
 		Dimension lblSize = new Dimension(10, 30);
 		Dimension txtSize = new Dimension(35, 30);
+		Dimension lblLongSize = new Dimension(85, 30);
 		Dimension btnSize = new Dimension(90, 30);
 		
 		txtN = new JTextField("");
@@ -151,9 +153,11 @@ public class Graph extends JPanel{
 		txtn = new JTextField("");
 		txtn.setPreferredSize(txtSize);
 		
-		txtK = new JTextField("");
-		txtK.setPreferredSize(txtSize);
-		txtK.setEditable(false);
+		txtUpperB = new JTextField("");
+		txtUpperB.setPreferredSize(txtSize);
+		
+		txtLowerB = new JTextField("");
+		txtLowerB.setPreferredSize(txtSize);
 		
 		JLabel lbln = new JLabel("n");
 		lbln.setPreferredSize(lblSize);
@@ -161,14 +165,17 @@ public class Graph extends JPanel{
 		JLabel lblN = new JLabel("N");
 		lblN.setPreferredSize(lblSize);
 		
-		JLabel lblK = new JLabel("K");
-		lblK.setPreferredSize(lblSize);
+		JLabel lblUp = new JLabel("Upper Bound");
+		lblUp.setPreferredSize(lblLongSize);
+		
+		JLabel lblLow = new JLabel("Lower Bound");
+		lblLow.setPreferredSize(lblLongSize);
 		
 		lblgivenX = new JLabel("Probability given x = 0 : ");
 		lblgivenX.setPreferredSize(new Dimension(300, 30));
 		//lblgivenX.setBorder(BorderFactory.createEtchedBorder());
 		
-		btnCalculate = new JButton("Calculate");
+		btnCalculate = new JButton("Generate");
 		btnCalculate.setBorder(BorderFactory.createEtchedBorder());
 		btnCalculate.setPreferredSize(btnSize);
 				
@@ -183,8 +190,12 @@ public class Graph extends JPanel{
 				
 		fieldContainer.add(Box.createRigidArea(new Dimension(45, 30)));
 		
-		fieldContainer.add(lblK);
-		fieldContainer.add(txtK);
+		fieldContainer.add(lblUp);
+		fieldContainer.add(txtUpperB);
+		
+		fieldContainer.add(lblLow);
+		fieldContainer.add(txtLowerB);
+		
 		
 		
 		lblError = new JLabel("");
@@ -199,10 +210,13 @@ public class Graph extends JPanel{
 		sliderContainer.setLayout(new BoxLayout(sliderContainer, BoxLayout.Y_AXIS));
 		// sliderContainer.setPreferredSize(new Dimension(400, 125));
 		
-		lblK = new JLabel("k - number of total success elements in the population size");
-		lblK.setPreferredSize(lblSize);
+		lblUp = new JLabel("k - number of total success elements in the population size");
+		lblUp.setPreferredSize(lblSize);
 		
-		sliderContainer.add(lblK);
+		lblUp = new JLabel("k - number of total success elements in the population size");
+		lblUp.setPreferredSize(lblSize);
+		
+		sliderContainer.add(lblUp);
 		
 		sliderK = new JSlider(JSlider.HORIZONTAL, MIN_N, MAX_N, DEFAULT_X);
 		sliderK.setPreferredSize(new Dimension(300, 30));
@@ -264,9 +278,14 @@ public class Graph extends JPanel{
 		return value;
 	}
 	
-	public int getk() throws Exception{
-		txtK.setText(sliderK.getValue() + "");
-		return sliderK.getValue();
+	public int getUpperB() throws Exception{
+		int value = Integer.parseInt(txtUpperB.getText());
+		return value;
+	}
+	
+	public int getLowerB() throws Exception{
+		int value = Integer.parseInt(txtLowerB.getText());
+		return value;
 	}
 	
 	public void setn(int n) {
@@ -278,7 +297,7 @@ public class Graph extends JPanel{
 		Object singleX[];
 		Object rangeX[];
 		try {
-		Object _singleX[] = {txtn, txtN, getk()};
+		Object _singleX[] = {txtn, txtN, getUpperB()};
 		
 		singleX = _singleX;
 		}catch(Exception e){

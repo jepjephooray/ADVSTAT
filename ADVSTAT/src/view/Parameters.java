@@ -3,15 +3,17 @@ package view;
 public class Parameters {
 	private int n;
 	private int N;
-	private int k;
+	private int u;
+	private int l;
 	
 	private int sliderMinimum;
 	
-	public Parameters(int n, int N, int k, int sliderMinimum, int sliderMaximum) {
+	public Parameters(int n, int N, int u, int l, int sliderMinimum, int sliderMaximum) {
 		super();
 		this.n = n;
 		this.N = N;
-		this.k = k;
+		this.u = u;
+		this.l = l;
 		this.sliderMinimum = sliderMinimum;
 		this.sliderMaximum = sliderMaximum;
 	}
@@ -25,8 +27,18 @@ public class Parameters {
 	public int getBigN() {
 		return N;
 	}
-	public int getK() {
-		return k;
+	
+	public int getU() {
+		return u;
+	}
+	public void setU(int u) {
+		this.u = u;
+	}
+	public int getL() {
+		return l;
+	}
+	public void setL(int l) {
+		this.l = l;
 	}
 	public int getMinimum() {
 		return sliderMinimum;
