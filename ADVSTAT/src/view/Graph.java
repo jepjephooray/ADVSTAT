@@ -153,11 +153,11 @@ public class Graph extends JPanel{
 		txtn = new JTextField("");
 		txtn.setPreferredSize(txtSize);
 		
-		txtUpperB = new JTextField("");
-		txtUpperB.setPreferredSize(txtSize);
-		
 		txtLowerB = new JTextField("");
 		txtLowerB.setPreferredSize(txtSize);
+		
+		txtUpperB = new JTextField("");
+		txtUpperB.setPreferredSize(txtSize);
 		
 		JLabel lbln = new JLabel("n");
 		lbln.setPreferredSize(lblSize);
@@ -190,30 +190,23 @@ public class Graph extends JPanel{
 				
 		fieldContainer.add(Box.createRigidArea(new Dimension(45, 30)));
 		
-		fieldContainer.add(lblUp);
-		fieldContainer.add(txtUpperB);
-		
 		fieldContainer.add(lblLow);
 		fieldContainer.add(txtLowerB);
 		
-		
-		
+		fieldContainer.add(lblUp);
+		fieldContainer.add(txtUpperB);
+	
 		lblError = new JLabel("");
 		lblError.setForeground(Color.red);
 		
 		fieldContainer.add(lblError);
-
-		
 
 		JPanel sliderContainer = new JPanel();
 		sliderContainer.setBorder(BorderFactory.createTitledBorder("Input"));
 		sliderContainer.setLayout(new BoxLayout(sliderContainer, BoxLayout.Y_AXIS));
 		// sliderContainer.setPreferredSize(new Dimension(400, 125));
 		
-		lblUp = new JLabel("k - number of total success elements in the population size");
-		lblUp.setPreferredSize(lblSize);
-		
-		lblUp = new JLabel("k - number of total success elements in the population size");
+		lblUp = new JLabel("N");
 		lblUp.setPreferredSize(lblSize);
 		
 		sliderContainer.add(lblUp);
