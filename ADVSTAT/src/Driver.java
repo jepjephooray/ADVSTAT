@@ -1,5 +1,7 @@
+import view.View;
 import view.View2;
 import controller.Controller;
+import controller.Controller2;
 import model.Model;
 import model.Population;
 
@@ -7,10 +9,9 @@ import model.Population;
 public class Driver {
 	
 	public static void main(String args[]) {
-		View2 view = new View2();
+		View view = new View();
 		Model model = new Model();
-		Controller controller = new Controller(view, model);
-		controller.display();
+		Controller2 controller = new Controller2(model, view);
 		
 	}
 	
