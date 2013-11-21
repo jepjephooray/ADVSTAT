@@ -39,9 +39,14 @@ public class Controller2 implements GraphUpdateListener {
 		Enumeration<String> keys = frequencyTable.keys();
 		
 		String currentKey;
-		while ((currentKey = keys.nextElement()) != null){
-			Double frequency = frequencyTable.get(currentKey);
-			
+		
+		for(int x = 0; x < p.getMaximum(); x++){
+			Double frequency = null;
+			while ((currentKey = keys.nextElement()) != null){
+				 frequency = frequencyTable.get(currentKey);
+				
+			}
+			data[0][x] = frequency;
 		}
 		
 		// update
