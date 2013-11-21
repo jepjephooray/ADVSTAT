@@ -1,6 +1,8 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Hashtable;
 import java.util.Random;
 
 import org.paukov.combinatorics.Factory;
@@ -132,6 +134,8 @@ public class Model {
 		for (Sample sample : samplingDistribution) {
 			System.out.println(sample.mean + " - " + sample.meanFrequency + " - " + sample.meanRelativeFrequency);
 		}
+		
+		
 	}
 	
 	private boolean hasMean(float mean, ArrayList<Sample> samplingDistribution) {
