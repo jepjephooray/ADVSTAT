@@ -25,7 +25,7 @@ import org.jfree.data.general.DatasetUtilities;
 
 
 public class View extends JFrame implements ChangeListener, KeyListener{
-	Graph graph;
+	MainPanel mainPanel;
 	ViewTable table;
 	private GraphUpdateListener listener;
 	
@@ -64,7 +64,7 @@ public class View extends JFrame implements ChangeListener, KeyListener{
 		
 		JTabbedPane tabbedPane = new JTabbedPane();
          
-        JComponent panel1 = graph = new Graph();
+        JComponent panel1 = mainPanel = new MainPanel();
         tabbedPane.addTab("Graph", panel1);
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
          
@@ -90,7 +90,7 @@ public class View extends JFrame implements ChangeListener, KeyListener{
 
 	public void addGraphListener(GraphUpdateListener listener) {
 		this.listener = listener;
-		graph.addGraphListener(this);
+		mainPanel.addGraphListener(this);
 	}
 	
 
@@ -112,32 +112,33 @@ public class View extends JFrame implements ChangeListener, KeyListener{
 
 	public void Trigger(Object src) {
 		try {
-			graph.clearErrors();
-			int n = graph.getn(src);
-			int u = graph.getUpperB();
-			int l = graph.getLowerB();
-			int N = Graph.MAX_N = graph.getN();
-			if (graph.shouldDisplayGraph()){
+			ParameterPanel parameterPanel = mainPanel.parameterPanel;
+			parameterPanel.clearErrors();
+			int n = parameterPanel.getn(src);
+			int u = parameterPanel.getUpperB();
+			int l = parameterPanel.getLowerB();
+			int N = parameterPanel.getN();
+			if (parameterPanel.shouldDisplayGraph()){
 				
 				if (src instanceof JTextField){
-					graph.setMaximumK(N);
+					parameterPanel.setMaximumK(N);
 				}
 				
-				Parameters newParam = new Parameters(n, N, u, l, graph.getMinimumK(), graph.getMaximumK(), GenerationType.Bimodal);
+				Parameters newParam = new Parameters(n, N, u, l, parameterPanel.getMinimumK(), parameterPanel.getMaximumK(), GenerationType.Bimodal);
 				
 				listener.updatePerformed(new GraphUpdateEvent(src, newParam));
 			}
 		} catch(Exception e) {
-			graph.clearErrors();
+			mainPanel.parameterPanel.clearErrors();
 			
 		}
 	}
 	
-	public void UpdateGraph(double[][] data){
+	public void UpdatePopulationGraph(double[][] data){
 		CategoryDataset dataset = DatasetUtilities.createCategoryDataset(
 	            "Series ", "", data
 	        );
-	        graph.updateDomain(dataset);
+	        mainPanel.updatePopulationDomain(dataset);
 	        table.updateTable(data);
 	}
 	
