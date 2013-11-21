@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Random;
 
@@ -18,40 +17,42 @@ public class Model {
 		population = new Population();
 	}
 	
-	public float[] generateNormal(int size, int lower, int upper){
-		
-		float[] f = new float[size];
-		float[] temp = null; 
+	public ArrayList<Double> generateContinuousNormal(int size, int lower, int upper){
+		ArrayList<Double> data = new ArrayList<Double>();
+		ArrayList<Double> temp = null; 
 		
 		for(int i = 0; i < size; i++){
-			
-			temp = generateRandom(central,lower,upper);
-			
-			
-			f[i] = getMean(temp);
-			
+			temp = generateContinuousRandom(central,lower,upper);
+			data.add(getMean(temp));
 		}
-		
-		return f;
+		return data;
 	}
 	
 	
-	public float[] generateRandom(int size, int lower, int upper){
-		Random r = new Random();
-		float[] f = new float[size];
+	public ArrayList<Double> generateContinuousRandom(int size, int lower, int upper){
+		Random rand = new Random();
+		ArrayList<Double> data = new ArrayList<Double>();
 		for(int i = 0; i < size; i++)
-			f[i] = r.nextFloat() * (upper - lower) + lower;
+			data.add(lower + rand.nextDouble() * (upper - lower));
 		
-		return f;
+		return data;
 		
 	}
 	
-	public static float getMean(float[] population){
-		float sum = 0;
-		for(int i = 0; i < population.length; i++)
-			sum += population[i];
-		return sum / population.length;
+	public ArrayList<Integer> generateDiscreteRandom(int size, int lower, int upper){
+		Random rand = new Random();
+		ArrayList<Integer> data = new ArrayList<Integer>();
+		for(int i = 0; i < size; i++)
+			data.add(lower + rand.nextInt(upper+1));
+		return data;
 		
+	}
+	
+	public double getMean(ArrayList<Double> data){
+		double sum = 0;
+		for(int i = 0; i < data.size(); i++)
+			sum += data.get(i);
+		return sum / data.size();
 	}
 	
 	public void generatePossibleSamples(int sampleSize) {
@@ -130,6 +131,18 @@ public class Model {
 				"variance: " + population.getVarianceOfSampleMeans());
 	}
 	
+	public Hashtable<String, Integer> getFrequencyTable() {
+		Hashtable<String, Integer> frequencyTable = new Hashtable<String, Integer>();
+		
+		for (int i = 0; i < population.getData().length; i++) {
+			String key = Double.toString(population.getData()[i]);
+			Integer value = (frequencyTable.containsKey(key) ? frequencyTable.get(key) + 1 : 1);
+			frequencyTable.put(key, value);
+		}
+		
+		return frequencyTable;
+	}
+	
 	public void generatePopulationDistributionTable() {
 		ArrayList<PopulationDataEntry> populationDistribution = new ArrayList<PopulationDataEntry>();
 		int count = 0;
@@ -193,5 +206,13 @@ public class Model {
 
 	public Population getPopulation() {
 		return population;
+	}
+	
+	public void setPopulationSize(int size) {
+		population.setPopulationSize(size);
+	}
+	
+	public void setSampleSize(int size) {
+		population.setSampleSize(size);
 	}
 }
