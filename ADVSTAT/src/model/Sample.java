@@ -11,6 +11,7 @@ public class Sample {
 	public Sample(int sampleSize, ICombinatoricsVector<Double> data) {
 		this.data = data;
 		this.sampleSize = sampleSize;
+		
 		meanRelativeFrequency = 0;
 		int sum = 0;
 		for(int i = 0; i < data.getSize(); i++)

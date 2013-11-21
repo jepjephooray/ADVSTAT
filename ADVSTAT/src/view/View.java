@@ -17,6 +17,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 
+import model.Model.GenerationType;
+
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetUtilities;
 
@@ -121,7 +123,7 @@ public class View extends JFrame implements ChangeListener, KeyListener{
 					graph.setMaximumK(N);
 				}
 				
-				Parameters newParam = new Parameters(n, N, u, l, graph.getMinimumK(), graph.getMaximumK());
+				Parameters newParam = new Parameters(n, N, u, l, graph.getMinimumK(), graph.getMaximumK(), GenerationType.Bimodal);
 				
 				listener.updatePerformed(new GraphUpdateEvent(src, newParam));
 			}

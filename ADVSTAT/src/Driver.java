@@ -3,7 +3,7 @@ import java.util.Hashtable;
 
 import view.View;
 import controller.Controller;
-import controller.Controller2;
+import controller.Controller;
 import model.Model;
 import model.Population;
 
@@ -13,8 +13,6 @@ public class Driver {
 	public static void main(String args[]) {
 		View view = new View();
 		Model model = new Model();
-		model.generateDiscreteData(20, 0, 10);
-		System.out.println();
 		//Hashtable<String, Integer> freqTable = model.getPopulationFrequencyTable();
 		//System.out.println();
 		
@@ -29,7 +27,7 @@ public class Driver {
 		
 		// Controller controller = new Controller(view, model);
 		//controller.display();
-		Controller2 controller = new Controller2(model, view);
+		Controller controller = new Controller(model, view);
 		
 	}
 	

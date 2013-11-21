@@ -1,14 +1,18 @@
 package view;
 
+import model.Model.GenerationType;
+
 public class Parameters {
 	private int n;
 	private int N;
 	private int u;
 	private int l;
 	
+	private GenerationType type;
+	
 	private int sliderMinimum;
 	
-	public Parameters(int n, int N, int u, int l, int sliderMinimum, int sliderMaximum) {
+	public Parameters(int n, int N, int u, int l, int sliderMinimum, int sliderMaximum, GenerationType type) {
 		super();
 		this.n = n;
 		this.N = N;
@@ -16,6 +20,7 @@ public class Parameters {
 		this.l = l;
 		this.sliderMinimum = sliderMinimum;
 		this.sliderMaximum = sliderMaximum;
+		this.type = type;
 	}
 	
 	private int sliderMaximum;
@@ -46,4 +51,8 @@ public class Parameters {
 	public int getMaximum() {
 		return sliderMaximum;
 	}
+	public GenerationType getType() {
+		return type;
+	}
+
 }
