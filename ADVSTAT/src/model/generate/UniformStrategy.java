@@ -7,7 +7,6 @@ import view.Parameters;
 
 public class UniformStrategy extends GenerationStrategy{
 
-
 	public UniformStrategy(Parameters param) {
 		super(param);
 	}

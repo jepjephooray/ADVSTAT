@@ -13,11 +13,13 @@ public class NormalStrategy extends GenerationStrategy{
 	}
 
 	public ArrayList<Double> Generate(){
-		Random rand = new Random();
 		ArrayList<Double> data = new ArrayList<Double>();
-		for(int i = 0; i < populationSize; i++)
-			data.add(lowerBound + rand.nextDouble() * (upperBound - lowerBound));
+		ArrayList<Double> temp = null; 
 		
+		for(int i = 0; i < populationSize; i++){
+			//temp = generateRandom(central, lowerBound, upperBound);
+			//data.add(getMean(temp));
+		}
 		return data;
 		
 	}

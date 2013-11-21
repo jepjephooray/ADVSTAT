@@ -7,8 +7,6 @@ import view.Parameters;
 
 public class RandomStrategy extends GenerationStrategy{
 
-	
-
 	public RandomStrategy(Parameters param) {
 		super(param);
 	}

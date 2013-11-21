@@ -1,12 +1,17 @@
 package model;
 
+import java.text.Bidi;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Hashtable;
 import java.util.Random;
 
+import model.generate.BimodalStrategy;
 import model.generate.GenerationStrategy;
+import model.generate.NormalStrategy;
 import model.generate.RandomStrategy;
+import model.generate.SkewedStrategy;
+import model.generate.UniformStrategy;
 
 import org.paukov.combinatorics.Factory;
 import org.paukov.combinatorics.Generator;
@@ -51,19 +56,23 @@ public class Model {
 		
 		GenerationStrategy strategy = null;
 		switch(generationType){
-		case Bimodal:
-			break;
-		case Normal:
-			break;
-		case Random:
-			strategy = new RandomStrategy(param);
-			break;
-		case Skewed:
-			break;
-		case Uniform:
-			break;
-		default:
-			break;
+			case Bimodal:
+				strategy = new BimodalStrategy(param);
+				break;
+			case Normal:
+				strategy = new NormalStrategy(param);
+				break;
+			case Random:
+				strategy = new RandomStrategy(param);
+				break;
+			case Skewed:
+				strategy = new SkewedStrategy(param);
+				break;
+			case Uniform:
+				strategy = new UniformStrategy(param);
+				break;
+			default:
+				break;
 		}
 		population = new Population(strategy, param);
 	}
