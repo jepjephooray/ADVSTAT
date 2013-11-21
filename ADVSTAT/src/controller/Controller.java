@@ -6,16 +6,16 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import model.Model;
-import view.View;
+import view.View2;
 
 public class Controller {
 	
-	View view;
+	View2 view;
 	Model model;
 	ArrayList<Double> distList = new ArrayList<>();
 	generateListener generateListener = new generateListener();
 	
-	public Controller(View view, Model model) {
+	public Controller(View2 view, Model model) {
 		
 		this.view = view;
 		this.model = model;

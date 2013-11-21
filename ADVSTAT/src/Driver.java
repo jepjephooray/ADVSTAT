@@ -3,6 +3,7 @@ import java.util.Hashtable;
 
 import view.View;
 import controller.Controller;
+import controller.Controller2;
 import model.Model;
 import model.Population;
 
@@ -26,8 +27,9 @@ public class Driver {
 		}
 		*/
 		
-		Controller controller = new Controller(view, model);
+		// Controller controller = new Controller(view, model);
 		//controller.display();
+		Controller2 controller = new Controller2(model, view);
 		
 	}
 	
