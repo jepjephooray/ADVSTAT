@@ -1,11 +1,6 @@
-import java.util.Enumeration;
-import java.util.Hashtable;
-
+import model.Model;
 import view.View;
 import controller.Controller;
-import controller.Controller;
-import model.Model;
-import model.Population;
 
 
 public class Driver {
