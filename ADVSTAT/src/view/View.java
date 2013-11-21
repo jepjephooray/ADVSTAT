@@ -49,7 +49,7 @@ public class View extends JFrame implements ActionListener, KeyListener{
 	private DefaultTableModel tbModel;
 	private JTable table;
 	private JSlider sliderP, sliderS;
-	
+	private int defaultSliderMax,defaultSliderMin;
 	public View() {
 		super("ADVSTAT");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,6 +64,9 @@ public class View extends JFrame implements ActionListener, KeyListener{
 		addComponents();
 	}
 	private void initComponents(){
+		defaultSliderMax = 5;
+		defaultSliderMin = 0;
+		
 		txtPopulationSize = new JTextField();
 		txtSampleSize = new JTextField();
 		txtLowerBound = new JTextField();
@@ -127,38 +130,38 @@ public class View extends JFrame implements ActionListener, KeyListener{
 		
 		lblPopulationSize.setBounds(50, verticalLocation + 20, 150, 30);
 		
-		sliderP.setBounds(40,verticalLocation + 50, 210, 30);
+		sliderP.setBounds(40,verticalLocation + 50, 210, 50);
 		sliderP.setPaintLabels(true);
 		sliderP.setMajorTickSpacing(1);
 		sliderP.setPaintTicks(true);
+		setMaximumP(defaultSliderMax);
+		setMinimumP(defaultSliderMin);
 		
 		
-		lblSampleSize.setBounds(50, verticalLocation + 80, 150, 30);
+		lblSampleSize.setBounds(50, verticalLocation + 110, 150, 30);
 		
-		sliderS.setBounds(40,verticalLocation + 110, 210, 30);
+		sliderS.setBounds(40,verticalLocation + 140, 210, 50);
+		sliderS.setPaintLabels(true);
+		sliderS.setMajorTickSpacing(1);
+		sliderS.setPaintTicks(true);
+		setMaximumS(defaultSliderMax);
+		setMinimumS(defaultSliderMin);
 		
-		lblLowerBound.setBounds(50, verticalLocation + 140, 150, 30);
-		lblUpperBound.setBounds(50, verticalLocation + 180, 150, 30);
+		lblLowerBound.setBounds(50, verticalLocation + 190, 150, 30);
+		lblUpperBound.setBounds(50, verticalLocation + 230, 150, 30);
 	
 		txtPopulationSize.setBounds(160, verticalLocation + 23, 85, 25);
-		txtSampleSize.setBounds(160, verticalLocation + 83, 85, 25);
-		txtLowerBound.setBounds(160, verticalLocation + 143, 85, 30);
-		txtUpperBound.setBounds(160, verticalLocation + 183, 85, 30);
+		txtSampleSize.setBounds(160, verticalLocation + 113, 85, 25);
+		txtLowerBound.setBounds(160, verticalLocation + 193, 85, 30);
+		txtUpperBound.setBounds(160, verticalLocation + 233, 85, 30);
 		
-		lblType.setBounds(50, verticalLocation + 220, 150, 30);
-		cmbxType.setBounds(160, verticalLocation + 223, 85, 25);
+		lblType.setBounds(50, verticalLocation + 270, 150, 30);
+		cmbxType.setBounds(160, verticalLocation + 273, 85, 25);
 	
-		pnlGraphPView.setBounds(280, verticalLocation + 0, 500, 500);
-	//	pnlGraphPView.setBorder(BorderFactory.createLineBorder(Color.black));
-		pnlGraphPView.setBorder(BorderFactory.createEtchedBorder(Color.black, getBackground()));
 		
-		
-		pnlGraphSView.setBounds(750, verticalLocation + 0, 500, 500);
-		pnlGraphSView.setBorder(BorderFactory.createLineBorder(Color.black));
-		
-		btnGenerate.setBounds(36, verticalLocation + 260, 100, 30);
-		btnReset.setBounds(147, verticalLocation + 260, 100, 30);
-		lblErrorMsg.setBounds(50, verticalLocation + 290, 300, 30);
+		btnGenerate.setBounds(36, verticalLocation + 310, 100, 30);
+		btnReset.setBounds(147, verticalLocation + 310, 100, 30);
+		lblErrorMsg.setBounds(50, verticalLocation + 340, 300, 30);
 		
 		JLabel label = new JLabel("Probability Distribution Table");
 		label.setBounds(36, verticalLocation + 320, 210, 30);
@@ -169,7 +172,15 @@ public class View extends JFrame implements ActionListener, KeyListener{
 		btnGenerate.setFocusable(false);
 		btnReset.setFocusable(false);
 		
-		pnlMenuView.add(label);
+		pnlGraphPView.setBounds(280, verticalLocation + 0, 500, 500);
+	//	pnlGraphPView.setBorder(BorderFactory.createLineBorder(Color.black));
+		pnlGraphPView.setBorder(BorderFactory.createEtchedBorder(Color.black, getBackground()));
+			
+			
+		pnlGraphSView.setBounds(750, verticalLocation + 0, 500, 500);
+		pnlGraphSView.setBorder(BorderFactory.createLineBorder(Color.black));
+		
+	//	pnlMenuView.add(label);
 	}
 	private void addComponents(){
 		pnlMenuView.add(txtPopulationSize);
@@ -194,13 +205,31 @@ public class View extends JFrame implements ActionListener, KeyListener{
 		
 		pnlMenuView.add(lblErrorMsg);
 		
-		pnlMenuView.add(sp);
+	//	pnlMenuView.add(sp);
 		this.add(pnlGraphPView);
 		this.add(pnlGraphSView);
 		this.add(pnlMenuView);
 		
 	}
+	public void setMinimumP(int minimum) {
+		if (sliderP.getMinimum() != minimum) 
+			sliderP.setMinimum(minimum);
+	}
 	
+	public void setMaximumP(int maximum) {
+		if (sliderP.getMaximum() != maximum) 
+			sliderP.setMaximum(maximum);
+	}
+	
+	public void setMinimumS(int minimum) {
+		if (sliderS.getMinimum() != minimum) 
+			sliderS.setMinimum(minimum);
+	}
+	
+	public void setMaximumS(int maximum) {
+		if (sliderS.getMaximum() != maximum) 
+			sliderS.setMaximum(maximum);
+	}
 	public void displayDistList(ArrayList<Double> distList){
 		
 		
