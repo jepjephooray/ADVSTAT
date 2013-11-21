@@ -1,16 +1,16 @@
 package model;
 
 public class PopulationDataEntry {
-	float data, relativeFrequency;
+	double data, relativeFrequency;
 	int frequency;
 	
-	public PopulationDataEntry(float data, float relativeFrequency, int frequency) {
+	public PopulationDataEntry(double data, double relativeFrequency, int frequency) {
 		this.data = data;
 		this.relativeFrequency = relativeFrequency;
 		this.frequency = frequency;
 	}
 
-	public float getData() {
+	public double getData() {
 		return data;
 	}
 
@@ -18,7 +18,7 @@ public class PopulationDataEntry {
 		this.data = data;
 	}
 
-	public float getRelativeFrequency() {
+	public double getRelativeFrequency() {
 		return relativeFrequency;
 	}
 

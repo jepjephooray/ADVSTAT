@@ -12,9 +12,46 @@ import org.paukov.combinatorics.ICombinatoricsVector;
 public class Model {
 	
 	Population population;
+	int central = 100;
 	
 	public Model() {
 		population = new Population();
+	}
+	
+	public float[] generateNormal(int size, int lower, int upper){
+		
+		float[] f = new float[size];
+		float[] temp = null; 
+		
+		for(int i = 0; i < size; i++){
+			
+			temp = generateRandom(central,lower,upper);
+			
+			
+			f[i] = getMean(temp);
+			
+		}
+		
+		return f;
+	}
+	
+	
+	public float[] generateRandom(int size, int lower, int upper){
+		Random r = new Random();
+		float[] f = new float[size];
+		for(int i = 0; i < size; i++)
+			f[i] = r.nextFloat() * (upper - lower) + lower;
+		
+		return f;
+		
+	}
+	
+	public static float getMean(float[] population){
+		float sum = 0;
+		for(int i = 0; i < population.length; i++)
+			sum += population[i];
+		return sum / population.length;
+		
 	}
 	
 	public void generatePossibleSamples(int sampleSize) {
@@ -22,36 +59,36 @@ public class Model {
 			return;
 		population.setSampleSize(sampleSize);
 		
-		ArrayList<Float> flot = new ArrayList<Float>();
+		ArrayList<Double> flot = new ArrayList<Double>();
 		for(int i = 0; i < population.getData().length; i++)
 			flot.add(population.getData()[i]);
 		
-		ICombinatoricsVector<Float> initialVector = Factory.createVector(flot); 
-		Generator<Float> gen = Factory.createMultiCombinationGenerator(initialVector, sampleSize);
+		ICombinatoricsVector<Double> initialVector = Factory.createVector(flot); 
+		Generator<Double> gen = Factory.createMultiCombinationGenerator(initialVector, sampleSize);
 		population.setPossibleSamplesSize(gen.getNumberOfGeneratedObjects());
 		
-		for(ICombinatoricsVector<Float> combination : gen) {
+		for(ICombinatoricsVector<Double> combination : gen) {
 			System.out.println(combination);
 			population.getSampleList().add(new Sample(sampleSize, combination));
 		}
 	}
 	
-	public void generateFloatData(int lowerBound, int upperBound, int size) {
+	public void generateContinuousData(int lowerBound, int upperBound, int size) {
 		if(size <= 0)
 			return;
 		Random rand = new Random();
-		float data[] = new float[size];
+		double data[] = new double[size];
 		for (int i = 0; i < data.length; i++) 
 			data[i] = lowerBound + rand.nextFloat()*(upperBound - lowerBound); // randomize float data with min lowerBound and max upperBound 
 		population.setData(data);
 		population.setPopulationSize(size);
 	}
 	
-	public void generateIntData(int lowerBound, int upperBound, int size) {
+	public void generateDiscreteData(int lowerBound, int upperBound, int size) {
 		if(size <= 0)
 			return;
 		Random rand = new Random();
-		float data[] = new float[size];
+		double data[] = new double[size];
 		for (int i = 0; i < data.length; i++) 
 			data[i] = lowerBound + rand.nextInt(upperBound-lowerBound+1); // randomize int data with min lowerBound and max upperBound 
 		population.setData(data);
@@ -64,7 +101,7 @@ public class Model {
 	}
 	
 	public void population_mean_variance() {
-		float sum = 0, mean, variance = 0;
+		double sum = 0, mean, variance = 0;
 		for (int i = 0; i < population.getData().length; i++) 
 			sum += population.getData()[i];
 		// u
@@ -80,7 +117,7 @@ public class Model {
 	}
 	
 	public void sampleMean_mean_variance() {
-		float sum = 0;
+		double sum = 0;
 		for (Sample sample : population.getSampleList()) {
 			sum += sample.getMean();
 		}
@@ -97,13 +134,13 @@ public class Model {
 		ArrayList<PopulationDataEntry> populationDistribution = new ArrayList<PopulationDataEntry>();
 		int count = 0;
 		for (int i = 0; i < population.getData().length; i++) {
-			float data = population.getData()[i];
+			double data = population.getData()[i];
 			if(!hasData(data, populationDistribution)) {
 				for (int j = 0; j < population.getData().length; j++) 
 					if(data == population.getData()[j])
 						count++;
 				
-				populationDistribution.add(new PopulationDataEntry(data, count / (float)population.getData().length, count));
+				populationDistribution.add(new PopulationDataEntry(data, count / (double)population.getData().length, count));
 				count = 0;
 			}
 		}
@@ -118,7 +155,7 @@ public class Model {
 		int count = 0;
 		for(int i = 0; i < population.getSampleList().size(); i++) {
 			Sample sample = population.getSampleList().get(i);
-			float mean = sample.getMean();
+			double mean = sample.getMean();
 			if(!hasMean(mean, samplingDistribution)) {
 				for (int j = 0; j < population.getSampleList().size(); j++) 
 					if(mean == population.getSampleList().get(j).getMean())
@@ -138,7 +175,7 @@ public class Model {
 		
 	}
 	
-	private boolean hasMean(float mean, ArrayList<Sample> samplingDistribution) {
+	private boolean hasMean(double mean, ArrayList<Sample> samplingDistribution) {
 		for (Sample sample : samplingDistribution) {
 			if(sample.getMean() == mean)
 				return true;
@@ -146,7 +183,7 @@ public class Model {
 		return false;
 	}
 	
-	private boolean hasData(float data, ArrayList<PopulationDataEntry> populationDistribution) {
+	private boolean hasData(double data, ArrayList<PopulationDataEntry> populationDistribution) {
 		for (PopulationDataEntry dataEntry : populationDistribution) {
 			if(dataEntry.getData() == data)
 				return true;
