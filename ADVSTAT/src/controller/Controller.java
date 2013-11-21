@@ -61,8 +61,8 @@ public class Controller {
 	
 	public void randomGenerate(){
 		Random random = new Random();
-        int maxDataPoints = 10;
-        int maxScore = 5;
+        int maxDataPoints = 5;
+        int maxScore = 10;
         distList.clear();
         for (int i = 0; i < maxDataPoints; i++) {
         	distList.add((double) random.nextDouble() * maxScore);
