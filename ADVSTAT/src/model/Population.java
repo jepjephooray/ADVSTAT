@@ -7,7 +7,8 @@ public class Population {
 	
 	private int populationSize, sampleSize;
 	private long possibleSamplesSize;
-	private double data[], meanOfSampleMeans, varianceOfSampleMeans;
+	private ArrayList<Double> data;
+	private double meanOfSampleMeans, varianceOfSampleMeans;
 	private double populationMean, populationVariance;
 	private ArrayList<PopulationDataEntry> probabilityDistribution;
 	private ArrayList<Sample> sampleList;
@@ -19,11 +20,11 @@ public class Population {
 		sampleSize = 0;
 		populationMean = 0;
 		populationVariance = 0;
-		data = null;
+		data = new ArrayList<Double>();
 	}
 	
-	public void setData(double data[]) { this.data = data; }
-	public double[] getData() { return data; }
+	public void setData(ArrayList<Double> data) { this.data = data; }
+	public ArrayList<Double> getData() { return data; }
 
 	public int getPopulationSize() { return populationSize; }
 	public void setPopulationSize(int populationSize) { this.populationSize = populationSize; }

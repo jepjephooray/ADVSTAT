@@ -1,7 +1,11 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Random;
 
 import org.paukov.combinatorics.Factory;
@@ -56,13 +60,13 @@ public class Model {
 	}
 	
 	public void generatePossibleSamples(int sampleSize) {
-		if(population.getData() == null || population.getData().length == 0)
+		if(population.getData() == null || population.getData().size() == 0)
 			return;
 		population.setSampleSize(sampleSize);
 		
 		ArrayList<Double> flot = new ArrayList<Double>();
-		for(int i = 0; i < population.getData().length; i++)
-			flot.add(population.getData()[i]);
+		for(int i = 0; i < population.getData().size(); i++)
+			flot.add(population.getData().get(i));
 		
 		ICombinatoricsVector<Double> initialVector = Factory.createVector(flot); 
 		Generator<Double> gen = Factory.createMultiCombinationGenerator(initialVector, sampleSize);
@@ -74,24 +78,26 @@ public class Model {
 		}
 	}
 	
-	public void generateContinuousData(int lowerBound, int upperBound, int size) {
+	public void generateContinuousData(int size, int lowerBound, int upperBound) {
 		if(size <= 0)
 			return;
 		Random rand = new Random();
-		double data[] = new double[size];
-		for (int i = 0; i < data.length; i++) 
-			data[i] = lowerBound + rand.nextFloat()*(upperBound - lowerBound); // randomize float data with min lowerBound and max upperBound 
+		ArrayList<Double> data = new ArrayList<Double>();
+		for (int i = 0; i < size; i++) 
+			data.add(lowerBound + rand.nextDouble()*(upperBound - lowerBound)); // randomize float data with min lowerBound and max upperBound 
 		population.setData(data);
 		population.setPopulationSize(size);
 	}
 	
-	public void generateDiscreteData(int lowerBound, int upperBound, int size) {
+	public void generateDiscreteData(int size, int lowerBound, int upperBound) {
 		if(size <= 0)
 			return;
 		Random rand = new Random();
-		double data[] = new double[size];
-		for (int i = 0; i < data.length; i++) 
-			data[i] = lowerBound + rand.nextInt(upperBound-lowerBound+1); // randomize int data with min lowerBound and max upperBound 
+		ArrayList<Double> data = new ArrayList<Double>();
+		for (int i = 0; i < size; i++) { 
+			data.add(lowerBound + (double)rand.nextInt(upperBound-lowerBound+1)); // randomize int data with min lowerBound and max upperBound 
+			System.out.println(data.get(i));
+		}
 		population.setData(data);
 		population.setPopulationSize(size);
 	}
@@ -103,15 +109,15 @@ public class Model {
 	
 	public void population_mean_variance() {
 		double sum = 0, mean, variance = 0;
-		for (int i = 0; i < population.getData().length; i++) 
-			sum += population.getData()[i];
+		for (int i = 0; i < population.getData().size(); i++) 
+			sum += population.getData().get(i);
 		// u
 		mean = sum / population.getPopulationSize();
 		population.setPopulationMean(mean);
 		
 		// o
-		for (int i = 0; i < population.getData().length; i++) 
-			variance = (population.getData()[i] - mean) * (population.getData()[i] - mean);
+		for (int i = 0; i < population.getData().size(); i++) 
+			variance = (population.getData().get(i) - mean) * (population.getData().get(i) - mean);
 		population.setPopulationVariance(variance);
 		
 		System.out.println("mean: " + population.getPopulationMean() + " ; variance: " + population.getPopulationVariance());
@@ -131,11 +137,29 @@ public class Model {
 				"variance: " + population.getVarianceOfSampleMeans());
 	}
 	
-	public Hashtable<String, Integer> getFrequencyTable() {
+	public ArrayList< Hashtable<String, Integer> > getSampleFrequencyTableList() {
+		ArrayList< Hashtable<String, Integer> > sampleTable = new ArrayList< Hashtable<String, Integer> >();
+		
+		ArrayList<Sample> sampleList = population.getSampleList();
+		for (int i = 0; i < sampleList.size(); i++) {
+			Hashtable<String, Integer> sampleFreq = new Hashtable<String, Integer>(); 
+			ArrayList<Double> sorted = getSortedSampleData(sampleList.get(i).data); 
+			for(int j = 0; j < sorted.size(); j++) {
+				String key = Double.toString(population.getData().get(i));
+				Integer value = (sampleFreq.containsKey(key) ? sampleFreq.get(key) + 1 : 1);
+				sampleFreq.put(key, value);
+			}
+			sampleTable.add(sampleFreq);
+		}
+		
+		return sampleTable;
+	}
+	
+	public Hashtable<String, Integer> getPopulationFrequencyTable() {
 		Hashtable<String, Integer> frequencyTable = new Hashtable<String, Integer>();
 		
-		for (int i = 0; i < population.getData().length; i++) {
-			String key = Double.toString(population.getData()[i]);
+		for (int i = 0; i < getSortedPopulationData().size(); i++) {
+			String key = Double.toString(population.getData().get(i));
 			Integer value = (frequencyTable.containsKey(key) ? frequencyTable.get(key) + 1 : 1);
 			frequencyTable.put(key, value);
 		}
@@ -143,6 +167,25 @@ public class Model {
 		return frequencyTable;
 	}
 	
+	private ArrayList<Double> getSortedSampleData(ICombinatoricsVector<Double> sample) {
+		ArrayList<Double> data = new ArrayList<Double>();
+		for(int i = 0; i < sample.getSize(); i++)
+			data.add(sample.getValue(i));
+		Collections.sort(data);
+		return data;
+	}
+	
+	private ArrayList<Double> getSortedPopulationData() {
+		Collections.sort(population.getData());
+		for (Double d : population.getData()) {
+			System.out.println(d);
+		}
+		return population.getData();
+	}
+	
+	
+	
+	/*
 	public void generatePopulationDistributionTable() {
 		ArrayList<PopulationDataEntry> populationDistribution = new ArrayList<PopulationDataEntry>();
 		int count = 0;
@@ -157,12 +200,12 @@ public class Model {
 				count = 0;
 			}
 		}
-		/*
-		for (DataEntry dataEntry : populationDistribution) 
-			System.out.println(dataEntry.data + " - " + dataEntry.frequency + " - " + dataEntry.relativeFrequency);
-		*/
-	}
-	
+		
+		//for (DataEntry dataEntry : populationDistribution) 
+		//	System.out.println(dataEntry.data + " - " + dataEntry.frequency + " - " + dataEntry.relativeFrequency);
+		
+	}*/
+	/*
 	public void generateSamplingDistributionTable() {
 		ArrayList<Sample> samplingDistribution = new ArrayList<Sample>();
 		int count = 0;
@@ -186,7 +229,7 @@ public class Model {
 		}
 		
 		
-	}
+	}*/
 	
 	private boolean hasMean(double mean, ArrayList<Sample> samplingDistribution) {
 		for (Sample sample : samplingDistribution) {

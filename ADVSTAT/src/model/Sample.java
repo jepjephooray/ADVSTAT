@@ -6,7 +6,7 @@ public class Sample {
 	
 	ICombinatoricsVector<Double> data;
 	int sampleSize, meanFrequency;
-	float mean, meanRelativeFrequency;
+	double mean, meanRelativeFrequency;
 	
 	public Sample(int sampleSize, ICombinatoricsVector<Double> data) {
 		this.data = data;
@@ -15,7 +15,7 @@ public class Sample {
 		int sum = 0;
 		for(int i = 0; i < data.getSize(); i++)
 			sum += data.getValue(i);
-		mean = (float)sum / data.getSize();
+		mean = (double)sum / data.getSize();
 		System.out.println("mean: "+ mean + "\n");
 	}
 
@@ -35,7 +35,7 @@ public class Sample {
 		this.data = data;
 	}
 
-	public float getMean() {
+	public double getMean() {
 		return mean;
 	}
 
@@ -43,7 +43,7 @@ public class Sample {
 		this.mean = mean;
 	}
 
-	public float getMeanRelativeFrequency() {
+	public double getMeanRelativeFrequency() {
 		return meanRelativeFrequency;
 	}
 
