@@ -4,11 +4,11 @@ import org.paukov.combinatorics.ICombinatoricsVector;
 
 public class Sample {
 	
-	ICombinatoricsVector<Float> data;
+	ICombinatoricsVector<Double> data;
 	int sampleSize, meanFrequency;
 	float mean, meanRelativeFrequency;
 	
-	public Sample(int sampleSize, ICombinatoricsVector<Float> data) {
+	public Sample(int sampleSize, ICombinatoricsVector<Double> data) {
 		this.data = data;
 		this.sampleSize = sampleSize;
 		meanRelativeFrequency = 0;
@@ -27,11 +27,11 @@ public class Sample {
 		this.sampleSize = sampleSize;
 	}
 
-	public ICombinatoricsVector<Float> getData() {
+	public ICombinatoricsVector<Double> getData() {
 		return data;
 	}
 
-	public void setData(ICombinatoricsVector<Float> data) {
+	public void setData(ICombinatoricsVector<Double> data) {
 		this.data = data;
 	}
 

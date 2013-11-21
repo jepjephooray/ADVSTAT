@@ -7,8 +7,8 @@ public class Population {
 	
 	private int populationSize, sampleSize;
 	private long possibleSamplesSize;
-	private float data[], meanOfSampleMeans, varianceOfSampleMeans;
-	private float populationMean, populationVariance;
+	private double data[], meanOfSampleMeans, varianceOfSampleMeans;
+	private double populationMean, populationVariance;
 	private ArrayList<PopulationDataEntry> probabilityDistribution;
 	private ArrayList<Sample> sampleList;
 	
@@ -22,8 +22,8 @@ public class Population {
 		data = null;
 	}
 	
-	public void setData(float data[]) { this.data = data; }
-	public float[] getData() { return data; }
+	public void setData(double data[]) { this.data = data; }
+	public double[] getData() { return data; }
 
 	public int getPopulationSize() { return populationSize; }
 	public void setPopulationSize(int populationSize) { this.populationSize = populationSize; }
@@ -31,11 +31,11 @@ public class Population {
 	public int getSampleSize() {return sampleSize;}
 	public void setSampleSize(int sampleSize) { this.sampleSize = sampleSize; }
 
-	public float getPopulationMean() { return populationMean; }
-	public void setPopulationMean(float populationMean) { this.populationMean = populationMean; }
+	public double getPopulationMean() { return populationMean; }
+	public void setPopulationMean(double populationMean) { this.populationMean = populationMean; }
 
-	public float getPopulationVariance() { return populationVariance; }
-	public void setPopulationVariance(float populationVariance) { this.populationVariance = populationVariance; }
+	public double getPopulationVariance() { return populationVariance; }
+	public void setPopulationVariance(double populationVariance) { this.populationVariance = populationVariance; }
 
 	public ArrayList<PopulationDataEntry> getProbabilityDistribution() { return probabilityDistribution; }
 	public void setProbabilityDistribution(
@@ -57,19 +57,19 @@ public class Population {
 		this.possibleSamplesSize = possibleSamplesSize;
 	}
 
-	public float getMeanOfSampleMeans() {
+	public double getMeanOfSampleMeans() {
 		return meanOfSampleMeans;
 	}
 
-	public void setMeanOfSampleMeans(float meanOfSampleMeans) {
+	public void setMeanOfSampleMeans(double meanOfSampleMeans) {
 		this.meanOfSampleMeans = meanOfSampleMeans;
 	}
 
-	public float getVarianceOfSampleMeans() {
+	public double getVarianceOfSampleMeans() {
 		return varianceOfSampleMeans;
 	}
 
-	public void setVarianceOfSampleMeans(float varianceOfSampleMeans) {
+	public void setVarianceOfSampleMeans(double varianceOfSampleMeans) {
 		this.varianceOfSampleMeans = varianceOfSampleMeans;
 	}
 	
