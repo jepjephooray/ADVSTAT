@@ -138,13 +138,22 @@ public class Model {
 	public double[][] getPopulationFrequencyTable() {
 		double[][] frequencyTable = new double[1][populationSize];
 		
-		ArrayList<Double> data = population.getData();
-		Collections.sort(data);
-		Double[] array = (Double[])data.toArray();
+		double[] data = population.getData();
+		ArrayList<Double> dobol = primitiveToObject(data); 
+		Collections.sort(dobol);
+		Double[] array = (Double[])dobol.toArray();
 		
 		for (int i = 0; i < array.length; i++)
 			frequencyTable[0][i] = array[i];
 		
 		return frequencyTable;
+	}
+	
+	private ArrayList<Double> primitiveToObject(double[] data) {
+		ArrayList<Double> data2 = new ArrayList<Double>();
+		for (int i = 0; i < data.length; i++) {
+			data2.add(data[i]);
+		}
+		return data2;
 	}
 }

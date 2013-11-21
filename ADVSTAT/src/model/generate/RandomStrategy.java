@@ -11,11 +11,11 @@ public class RandomStrategy extends GenerationStrategy{
 		super(param);
 	}
 
-	public ArrayList<Double> Generate(){
+	public double[] Generate(){
 		Random rand = new Random();
-		ArrayList<Double> data = new ArrayList<Double>();
+		double[] data = new double[populationSize];
 		for(int i = 0; i < populationSize; i++)
-			data.add(lowerBound + rand.nextDouble() * (upperBound - lowerBound));
+			data[i] = lowerBound + rand.nextDouble() * (upperBound - lowerBound);
 		
 		return data;
 		

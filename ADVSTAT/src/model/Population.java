@@ -12,7 +12,7 @@ import model.generate.GenerationStrategy;
 
 
 public class Population {
-	private ArrayList<Double> data;
+	private double[] data;
 	private ArrayList<Sample> listOfSamples;
 	private int sampleSize;
 	private int populationSize;
@@ -30,25 +30,33 @@ public class Population {
 		/**
 		 * Generates all the possible combinations
 		 */
-		if(data == null || data.size() == 0){
+		if(data == null || data.length == 0){
 			System.err.println("Invalid: No data from the population.");
 			return;
 		}
 		
-		ICombinatoricsVector<Double> initialVector = Factory.createVector(data); 
-		Generator<Double> generator = Factory.createMultiCombinationGenerator(initialVector, sampleSize);
-		
-		for(ICombinatoricsVector<Double> combination : generator) {
-			System.out.println(combination);
-			listOfSamples.add(new Sample(sampleSize, combination));
+		ArrayList<Double> dataList = new ArrayList<Double>();
+		for (int i = 0; i < data.length; i++) {
+			dataList.add(data[i]);
 		}
+		
+		ICombinatoricsVector<Double> initialVector = Factory.createVector(dataList); 
+		Generator<Double> generator = Factory.createPermutationWithRepetitionGenerator(initialVector, sampleSize);
+		
+		for(ICombinatoricsVector<Double> permutation : generator) {
+			System.out.println(permutation);
+			listOfSamples.add(new Sample(sampleSize, permutation));
+		}
+		
+		
+		
 	}
 
-	public ArrayList<Double> getData() {
+	public double[] getData() {
 		return data;
 	}
 
-	public void setData(ArrayList<Double> data) {
+	public void setData(double[] data) {
 		this.data = data;
 	}
 }

@@ -16,5 +16,5 @@ public abstract class GenerationStrategy {
 		upperBound = param.getU();
 		lowerBound = param.getL();
 	}
-	public abstract ArrayList<Double> Generate();
+	public abstract double[] Generate();
 }
