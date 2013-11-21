@@ -5,9 +5,10 @@ import java.util.Random;
 
 import view.Parameters;
 
-public class RandomStrategy extends GenerationStrategy{
+public class SkewedStrategy extends GenerationStrategy{
 
-	public RandomStrategy(Parameters param) {
+
+	public SkewedStrategy(Parameters param) {
 		super(param);
 	}
 

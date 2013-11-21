@@ -5,9 +5,9 @@ import java.util.Random;
 
 import view.Parameters;
 
-public class RandomStrategy extends GenerationStrategy{
+public class UniformStrategy extends GenerationStrategy{
 
-	public RandomStrategy(Parameters param) {
+	public UniformStrategy(Parameters param) {
 		super(param);
 	}
 
