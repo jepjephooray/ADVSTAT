@@ -28,11 +28,11 @@ public class Driver {
 		Controller controller = new Controller(model, view);
 		
 		//new Parameters(n, N, u, l, sliderMinimum, sliderMaximum, type)
-		Parameters param = new Parameters(5, 30, 20, 0, 5, 10, Model.GenerationType.Normal);
+		//Parameters param = new Parameters(5, 30, 20, 0, 5, 10, Model.GenerationType.Normal);
 		//NormalStrategy normStrat = new NormalStrategy(param);
 		//normStrat.Generate();
-		BimodalStrategy bimodal = new BimodalStrategy(param);
-		bimodal.Generate();
+		//BimodalStrategy bimodal = new BimodalStrategy(param);
+		//bimodal.Generate();
 	}
 	
 	
