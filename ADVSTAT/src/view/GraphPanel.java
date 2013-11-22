@@ -15,8 +15,10 @@ import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.title.LegendTitle;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DatasetUtilities;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.VerticalAlignment;
@@ -33,7 +35,7 @@ public class GraphPanel extends JPanel{
 		/**
 		 * Panel initialization
 		 */
-		setPreferredSize(new Dimension(400, 300));
+		setPreferredSize(new Dimension(600, 400));
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 
@@ -48,14 +50,37 @@ public class GraphPanel extends JPanel{
             "Series ", "", data
         );
         
-		final JFreeChart chart = createChart(dataset, title);
+	//	final JFreeChart chart = createChart(dataset, title);
+        final JFreeChart chart = generateBarChart();
 		final ChartPanel chartPanel = new ChartPanel(chart);
         add(chartPanel);
 	}
 
 
-	
-	private JFreeChart createChart(final CategoryDataset dataset, String title){
+	  public static JFreeChart generateBarChart() {
+	        DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
+	        dataSet.setValue(791, "Population", "1750 AD");
+	        dataSet.setValue(978, "Population", "1800 AD");
+	        dataSet.setValue(1262, "Population", "1850 AD");
+	        dataSet.setValue(1650, "Population", "1900 AD");
+	        dataSet.setValue(2519, "Population", "1950 AD");
+	        dataSet.setValue(6071, "Population", "2000 AD");
+	        dataSet.setValue(6072, "Population", "2001 AD");
+	        dataSet.setValue(6073, "Population", "2002 AD");
+	        
+	        
+	     final JFreeChart chart = ChartFactory.createBarChart(
+	                "World Population growth", "Year", "Population in millions",
+	                dataSet, PlotOrientation.VERTICAL, false, true, false);
+	 /*
+	     LegendTitle legend = chart.getLegend(); 
+	     Font nwfont=new Font("Arial",0,7); 
+	     legend.setItemFont(nwfont); 
+	     chart.addLegend(legend);
+	   */  
+	        return chart;
+	    }
+/*	private JFreeChart createChart(final CategoryDataset dataset, String title){
 		   final JFreeChart chart = ChartFactory.createAreaChart(
 		            title,    // chart title
 		            "N",               // domain axis label
@@ -109,7 +134,7 @@ public class GraphPanel extends JPanel{
 		        
 		        return chart;
 	}
-	
+	*/
 	public void addGraphListener(GraphUpdateListener listener) {
 		this.graphUpdateListener = listener;
 	}

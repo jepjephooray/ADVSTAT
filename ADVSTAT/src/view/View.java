@@ -122,6 +122,7 @@ public class View extends JFrame implements ChangeListener, KeyListener{
 				
 				if (src instanceof JTextField){
 					parameterPanel.setMaximumK(N);
+					parameterPanel.setMaximumn(N);
 				}
 				
 				Parameters newParam = new Parameters(n, N, u, l, parameterPanel.getMinimumK(), parameterPanel.getMaximumK(), GenerationType.Bimodal);

@@ -25,7 +25,7 @@ public class ParameterPanel extends JPanel{
 
 	private boolean hasError;
 	
-	private JTextField txtn;
+	private JLabel lbln;
 	private JTextField txtN;
 	private JTextField txtUpperB;
 	private JTextField txtLowerB;
@@ -39,15 +39,16 @@ public class ParameterPanel extends JPanel{
 		
 		JPanel formPanel = new JPanel(); 
 		
-		Dimension lblSize = new Dimension(10, 30);
+		Dimension lblSize = new Dimension(20, 30);
 		Dimension txtSize = new Dimension(35, 30);
 		Dimension lblLongSize = new Dimension(85, 30);
 		
 		txtN = new JTextField("");
 		txtN.setPreferredSize(txtSize);
 		
-		txtn = new JTextField("");
-		txtn.setPreferredSize(txtSize);
+		lbln = new JLabel("");
+		lbln.setPreferredSize(txtSize);
+		
 		
 		txtLowerB = new JTextField("");
 		txtLowerB.setPreferredSize(txtSize);
@@ -62,7 +63,7 @@ public class ParameterPanel extends JPanel{
 		cmbxType.addItem("Uniform");
 		cmbxType.addItem("Random");
 		
-		JLabel lbln = new JLabel("n");
+		JLabel lbln = new JLabel("n: ");
 		lbln.setPreferredSize(lblSize);
 		
 		JLabel lblN = new JLabel("N");
@@ -85,7 +86,7 @@ public class ParameterPanel extends JPanel{
 		
 	//	formPanel.add(Box.createRigidArea(new Dimension(45, 30)));
 		formPanel.add(lbln);
-		formPanel.add(txtn);
+		formPanel.add(lbln);
 				
 		formPanel.add(Box.createRigidArea(new Dimension(45, 30)));
 		
@@ -142,10 +143,8 @@ public class ParameterPanel extends JPanel{
 		lbln.setPreferredSize(lblSize);
 		sliderContainer.add(lbln);
 		slidern = new JSlider(JSlider.HORIZONTAL, MIN_N, MAX_N, DEFAULT_X);
-		slidern.setPaintLabels(true);
 		slidern.setMajorTickSpacing(1);
 		slidern.setPaintTicks(true);
-		slidern.setPaintLabels(true);
 		slidern.setPreferredSize(new Dimension(300, 30));
 		slidern.setPaintLabels(true);
 		sliderContainer.add(slidern);
@@ -155,10 +154,10 @@ public class ParameterPanel extends JPanel{
 	}
 	public int getn(Object src) throws Exception{
 		if (src != null && src.equals(slidern)){
-			txtn.setText("" + slidern.getValue());
+			lbln.setText("" + slidern.getValue());
 			return slidern.getValue();
 		}else
-			return Integer.parseInt(txtn.getText());
+			return Integer.parseInt(lbln.getText());
 	}
 	
 	public int getN() throws Exception{
@@ -179,15 +178,16 @@ public class ParameterPanel extends JPanel{
 	}
 	
 	public void setn(int n) {
-		txtn.setText(n+"");
+		lbln.setText(n+"");
 	}
 	
 	
 	public boolean isInputValid(int type) throws Exception {
-		Object singleX[];
+		boolean valid = true;
+/*		Object singleX[];
 		Object rangeX[];
 		try {
-		Object _singleX[] = {txtn, txtN};
+		Object _singleX[] = {lbln, txtN};
 		
 		singleX = _singleX;
 		}catch(Exception e){
@@ -196,7 +196,7 @@ public class ParameterPanel extends JPanel{
 		
 		
 		
-		boolean valid = true;
+		
 		clearErrors();
 		
 		for(int i = 0; i < singleX.length; i++) {
@@ -212,7 +212,7 @@ public class ParameterPanel extends JPanel{
 				valid = false;
 			}
 		}
-		if(this.getLowerB() > this.getUpperB()){
+*/		if(this.getLowerB() > this.getUpperB()){
 			txtLowerB.setBackground(Color.pink);
 			txtUpperB.setBackground(Color.pink);
 		}
@@ -220,22 +220,22 @@ public class ParameterPanel extends JPanel{
 	}
 	
 	public void clearErrors() {
-		txtn.setBackground(Color.white);
 		txtN.setBackground(Color.white);
 		txtLowerB.setBackground(Color.white);
 		txtUpperB.setBackground(Color.white);
 		hasError = false;
 		
 		
-		try {
+	/*	try {
 			if (getn(null) > getN()){
-				txtn.setBackground(Color.pink);
+				lbln.setBackground(Color.pink);
 				hasError = true;
 			}
 		}catch (Exception e){
 			hasError = true;
 		}
-	}
+*/	}
+	
 	
 	/**
 	 * Should only display the graph if there are no errors.
@@ -273,9 +273,20 @@ public class ParameterPanel extends JPanel{
 		if (sliderK.getMaximum() != maximum) 
 			sliderK.setMaximum(maximum);
 	}
+	public void setMinimumn(int minimum) {
+		if (slidern.getMinimum() != minimum) 
+			slidern.setMinimum(minimum);
+	}
+	
+	public void setMaximumn(int maximum) {
+		if (slidern.getMaximum() != maximum) 
+			slidern.setMaximum(maximum);
+	}
 	public void addGraphListener(View listener) {
-		txtn.addKeyListener(listener);
 		txtN.addKeyListener(listener);
+		txtLowerB.addKeyListener(listener);
+		txtUpperB.addKeyListener(listener);
+		
 		// sliderX.addChangeListener(listener);
 		sliderK.addChangeListener(listener);
 		slidern.addChangeListener(listener);
