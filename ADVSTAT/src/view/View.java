@@ -124,7 +124,7 @@ public class View extends JFrame implements ChangeListener, KeyListener{
 					parameterPanel.setMaximumK(N);
 					parameterPanel.setMaximumn(N);
 				}
-				
+				System.out.println(N);
 				Parameters newParam = new Parameters(n, N, u, l, parameterPanel.getMinimumK(), parameterPanel.getMaximumK(), GenerationType.Bimodal);
 				
 				listener.updatePerformed(new GraphUpdateEvent(src, newParam));

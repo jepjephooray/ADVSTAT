@@ -46,18 +46,19 @@ public class GraphPanel extends JPanel{
         		{0.0}
         };
 
-        final CategoryDataset dataset = DatasetUtilities.createCategoryDataset(
+    /*    final CategoryDataset dataset = DatasetUtilities.createCategoryDataset(
             "Series ", "", data
         );
-        
+      */
+		final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 	//	final JFreeChart chart = createChart(dataset, title);
-        final JFreeChart chart = generateBarChart();
+        final JFreeChart chart = generateBarChart(dataset, title);
 		final ChartPanel chartPanel = new ChartPanel(chart);
         add(chartPanel);
 	}
 
 
-	  public static JFreeChart generateBarChart() {
+	  public static JFreeChart generateBarChart(DefaultCategoryDataset dataset, String title) {
 	        DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
 	        dataSet.setValue(791, "Population", "1750 AD");
 	        dataSet.setValue(978, "Population", "1800 AD");
@@ -70,7 +71,7 @@ public class GraphPanel extends JPanel{
 	        
 	        
 	     final JFreeChart chart = ChartFactory.createBarChart(
-	                "World Population growth", "Year", "Population in millions",
+	                title, "Year", "Population in millions",
 	                dataSet, PlotOrientation.VERTICAL, false, true, false);
 	 /*
 	     LegendTitle legend = chart.getLegend(); 
