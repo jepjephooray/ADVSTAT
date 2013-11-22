@@ -67,7 +67,7 @@ public class BimodalStrategy extends GenerationStrategy{
 		Random rand = new Random();
 		double[] data = new double[populationSize];
 		for(int i = 0; i < populationSize; i++)
-			data[i] = lowerBound + rand.nextDouble() * (upperBound - lowerBound);
+			data[i] = (double)lowerBound + rand.nextInt(upperBound - lowerBound);
 		
 		return data;
 	}

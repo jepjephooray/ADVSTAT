@@ -29,13 +29,13 @@ public class Driver {
 		Controller controller = new Controller(model, view);
 		
 		//new Parameters(n, N, u, l, type)
-		Parameters param = new Parameters(5, 20, 5, 0, Model.GenerationType.Normal);
-		NormalStrategy normStrat = new NormalStrategy(param);
-		normStrat.Generate();
+		Parameters param = new Parameters(5, 10, 5, 0, Model.GenerationType.Normal);
+		//NormalStrategy normStrat = new NormalStrategy(param);
+		//normStrat.Generate();
 		//BimodalStrategy bimodal = new BimodalStrategy(param);
 		//bimodal.Generate();
-		//UniformStrategy uniform = new UniformStrategy(param);
-		//uniform.Generate();
+		UniformStrategy uniform = new UniformStrategy(param);
+		uniform.Generate();
 		
 	}
 	
