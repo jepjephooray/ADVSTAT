@@ -297,6 +297,8 @@ public class ParameterPanel extends JPanel{
 		// sliderX.addChangeListener(listener);
 		sliderPopulationSize.addChangeListener(listener);
 		sliderSampleSize.addChangeListener(listener);
+		
+		cmbxType.addActionListener(listener);
 	}
 
 	public GenerationType getGenerationType() {
