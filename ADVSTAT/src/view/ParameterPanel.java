@@ -14,156 +14,167 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
+import javax.swing.border.BevelBorder;
 import javax.swing.event.ChangeListener;
 
+import model.Model.GenerationType;
+
+import org.jdesktop.swingx.JXFormattedTextField;
+import org.jdesktop.swingx.JXTextField;
 import org.jfree.data.category.CategoryDataset;
 
 public class ParameterPanel extends JPanel{
-	public static final int DEFAULT_X = 1;
+	public static final int DEFAULT_N = 1;
 	public static final int MAX_N = 5;
-	public static final int MIN_N = 1;
+	public static final int MIN_N = 0;
 
 	private boolean hasError;
 	
-	private JLabel lbln;
 	private JTextField txtN;
 	private JTextField txtUpperB;
 	private JTextField txtLowerB;
-	private JLabel lblgivenX;
-	private JSlider sliderK, slidern;
+	private JSlider sliderPopulationSize, sliderSampleSize;
 	private JLabel lblError;
 	private JComboBox<String> cmbxType;
+	public JPanel sliderPanel;
+	private JPanel sliderContainerPopulationSize;
+	private JPanel sliderContainerSampleSize;
 	
 	public ParameterPanel() {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		JPanel formPanel = new JPanel(); 
+		JPanel formPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10)); 
 		
-		Dimension lblSize = new Dimension(20, 30);
+		Dimension lblSize = new Dimension(20, 50);
 		Dimension txtSize = new Dimension(35, 30);
-		Dimension lblLongSize = new Dimension(85, 30);
+		Dimension lblLongSize = new Dimension(120, 30);
 		
-		txtN = new JTextField("");
-		txtN.setPreferredSize(txtSize);
+		txtN = new JXFormattedTextField("Population size");
+		txtN.setPreferredSize(lblLongSize);
 		
-		lbln = new JLabel("");
-		lbln.setPreferredSize(txtSize);
+		txtLowerB = new JXFormattedTextField("Lower bound");
+		txtLowerB.setPreferredSize(lblLongSize);
 		
-		
-		txtLowerB = new JTextField("");
-		txtLowerB.setPreferredSize(txtSize);
-		
-		txtUpperB = new JTextField("");
-		txtUpperB.setPreferredSize(txtSize);
+		txtUpperB = new JXFormattedTextField("Upper bound");
+		txtUpperB.setPreferredSize(lblLongSize);
 		
 		cmbxType = new JComboBox<String>();
+		cmbxType.setPreferredSize(lblLongSize);
 		cmbxType.addItem("Normal");
-		cmbxType.addItem("Bimodial");
+		cmbxType.addItem("Bimodal");
 		cmbxType.addItem("Skewed");
 		cmbxType.addItem("Uniform");
 		cmbxType.addItem("Random");
 		
-		JLabel lbln = new JLabel("n: ");
-		lbln.setPreferredSize(lblSize);
+		JLabel lblN = new JLabel("Population size:");
+		lblN.setPreferredSize(lblLongSize);
 		
-		JLabel lblN = new JLabel("N");
-		lblN.setPreferredSize(lblSize);
-		
-		JLabel lblUp = new JLabel("Upper Bound");
+		JLabel lblUp = new JLabel("Upper bound:");
 		lblUp.setPreferredSize(lblLongSize);
 		
-		JLabel lblLow = new JLabel("Lower Bound");
+		JLabel lblLow = new JLabel("Lower bound:");
 		lblLow.setPreferredSize(lblLongSize);
 		
-		lblgivenX = new JLabel("Probability given x = 0 : ");
-		lblgivenX.setPreferredSize(new Dimension(300, 30));
-		//lblgivenX.setBorder(BorderFactory.createEtchedBorder());
 		
-		JLabel lblType = new JLabel("Type");
+		JLabel lblType = new JLabel("Data generation");
+		lblType.setPreferredSize(lblLongSize);
 		
-		formPanel.add(lblN);
+//		formPanel.add(lblN);
 		formPanel.add(txtN);
 		
-	//	formPanel.add(Box.createRigidArea(new Dimension(45, 30)));
-		formPanel.add(lbln);
-		formPanel.add(lbln);
-				
-		formPanel.add(Box.createRigidArea(new Dimension(45, 30)));
-		
-		formPanel.add(lblLow);
+//		formPanel.add(lblLow);
 		formPanel.add(txtLowerB);
 		
-		formPanel.add(lblUp);
+//		formPanel.add(lblUp);
 		formPanel.add(txtUpperB);
+		
 	
 		formPanel.add(lblType);
 		formPanel.add(cmbxType);
 		
-		lblError = new JLabel("");
+		lblError = new JLabel("Test error here");
 		lblError.setForeground(Color.red);
-		
+		lblError.setPreferredSize(lblLongSize);
 		formPanel.add(lblError);
 
-		JPanel sliderContainer = new JPanel();
-		sliderContainer.setBorder(BorderFactory.createTitledBorder("Input"));
-		sliderContainer.setLayout(new BoxLayout(sliderContainer, BoxLayout.Y_AXIS));
-		// sliderContainer.setPreferredSize(new Dimension(400, 125));
 		
-		lblUp = new JLabel("N");
-		lblUp.setPreferredSize(lblSize);
+		/**
+		 * Sliders
+		 */
 		
-		sliderContainer.add(lblUp);
 		
-		sliderK = new JSlider(JSlider.HORIZONTAL, MIN_N, MAX_N, DEFAULT_X);
-		sliderK.setPreferredSize(new Dimension(300, 30));
-		sliderK.setMajorTickSpacing(1);
-		sliderK.setPaintTicks(true);
-		sliderK.setPaintLabels(true);
-		sliderContainer.add(sliderK);
 		
-		/*
-		JLabel lblX = new JLabel("x - number of draws from the population");
-		lblX.setPreferredSize(lblSize);
+		sliderContainerPopulationSize = new JPanel();
+		sliderContainerPopulationSize.setBorder(BorderFactory.createTitledBorder("Simulate population size"));
+
 		
-		sliderContainer.add(lblX);
 		
-		sliderX = new JSlider(JSlider.HORIZONTAL, MIN_N, MAX_N, DEFAULT_X); 
-		sliderX.setPreferredSize(new Dimension(300, 30));
-		sliderX.setPaintLabels(true);
-		sliderX.setMajorTickSpacing(1);
-		sliderX.setPaintTicks(true);
-		sliderX.setPaintLabels(true);
-		sliderContainer.add(sliderX);
-		//sliderContainer.setBorder(BorderFactory.createTitledBorder(""));
-		sliderContainer.add(lblgivenX);
+		sliderPopulationSize = new JSlider(JSlider.HORIZONTAL, MIN_N, MAX_N, DEFAULT_N);
+		sliderPopulationSize.setPreferredSize(new Dimension(750, 30));
+		sliderPopulationSize.setMajorTickSpacing(1);
+		sliderPopulationSize.setPaintTicks(true);
+		sliderContainerPopulationSize.add(sliderPopulationSize);
+	
 		
-		*/
+		sliderContainerSampleSize = new JPanel();
+		sliderContainerSampleSize.setBorder(BorderFactory.createTitledBorder("Simulate sample size"));
 		
-		lbln = new JLabel("n");
-		lbln.setPreferredSize(lblSize);
-		sliderContainer.add(lbln);
-		slidern = new JSlider(JSlider.HORIZONTAL, MIN_N, MAX_N, DEFAULT_X);
-		slidern.setMajorTickSpacing(1);
-		slidern.setPaintTicks(true);
-		slidern.setPreferredSize(new Dimension(300, 30));
-		slidern.setPaintLabels(true);
-		sliderContainer.add(slidern);
+		sliderSampleSize = new JSlider(JSlider.HORIZONTAL, MIN_N, MAX_N, DEFAULT_N);
+		sliderSampleSize.setMajorTickSpacing(10);
+		sliderSampleSize.setMinorTickSpacing(5);
+		sliderSampleSize.setPaintTicks(true);
+		sliderSampleSize.setPreferredSize(new Dimension(750, 30));
+		sliderContainerSampleSize.add(sliderSampleSize);
+		
+		sliderPanel = new JPanel();
+		sliderPanel.setLayout(new BoxLayout(sliderPanel, BoxLayout.Y_AXIS));
+		sliderPanel.add(sliderContainerPopulationSize);
+		sliderPanel.add(sliderContainerSampleSize);
+		sliderPanel.setVisible(false);
 		
 		add(formPanel);
-		add(sliderContainer);
+		add(sliderPanel);
+		
 	}
-	public int getn(Object src) throws Exception{
-		if (src != null && src.equals(slidern)){
-			lbln.setText("" + slidern.getValue());
-			return slidern.getValue();
-		}else
-			return Integer.parseInt(lbln.getText());
+	
+	public void updatePopulation(int population){
+		sliderContainerPopulationSize.setBorder(null);
+		sliderContainerPopulationSize.setBorder(BorderFactory.createTitledBorder("Population size: " + population));
+		
+		
 	}
+	
+	public void updateSample(int sample){
+		sliderContainerSampleSize.setBorder(null);
+		sliderContainerSampleSize.setBorder(BorderFactory.createTitledBorder("Sample size: " + sample));
+	}
+	
 	
 	public int getN() throws Exception{
 		int value = Integer.parseInt(txtN.getText());
 		if (value > 100)
 			value = 100;
+		
+		int division = 0;
+		int minor = 0;
+		
+		if (value > 50){
+			division = 10;
+			minor = 5;
+		}else if (value > 10 && value < 50){
+			division = 5;
+			minor = 1;
+		}else {
+			division = 2;
+			minor = 1;
+		}
+		
+		sliderPopulationSize.setMajorTickSpacing(division);
+		sliderPopulationSize.setMinorTickSpacing(minor);
+		
+		sliderSampleSize.setMajorTickSpacing(division);
+		sliderSampleSize.setMinorTickSpacing(minor);
+		
 		return value;
 	}
 	
@@ -176,11 +187,6 @@ public class ParameterPanel extends JPanel{
 		int value = Integer.parseInt(txtLowerB.getText());
 		return value;
 	}
-	
-	public void setn(int n) {
-		lbln.setText(n+"");
-	}
-	
 	
 	public boolean isInputValid(int type) throws Exception {
 		boolean valid = true;
@@ -245,42 +251,43 @@ public class ParameterPanel extends JPanel{
 	}
 	
 	public void addChangeListener(ChangeListener listener){
-		sliderK.addChangeListener(listener);
-		slidern.addChangeListener(listener);
+		sliderPopulationSize.addChangeListener(listener);
+		sliderSampleSize.addChangeListener(listener);
 	}
 	
-	public int getValueOfK() {
-		return sliderK.getValue();
+	public int getPopulationSize() {
+		return sliderPopulationSize.getValue();
 	}
 	
-	public int getMinimumK() {
-		return sliderK.getMinimum();
+	public int getSampleSize() {
+		return sliderSampleSize.getValue();
 	}
 	
-	public int getMaximumK() {
-		return sliderK.getMaximum();
-	}
-	public void setGivenXProbability(int x, double prob) {
-		lblgivenX.setText("Probability given x = " + x + " : " + prob);
+	public int getPopulationSizeMinimum() {
+		return sliderPopulationSize.getMinimum();
 	}
 	
-	public void setMinimumK(int minimum) {
-		if (sliderK.getMinimum() != minimum) 
-			sliderK.setMinimum(minimum);
+	public int getPopulationSizeMaximum() {
+		return sliderPopulationSize.getMaximum();
 	}
 	
-	public void setMaximumK(int maximum) {
-		if (sliderK.getMaximum() != maximum) 
-			sliderK.setMaximum(maximum);
-	}
-	public void setMinimumn(int minimum) {
-		if (slidern.getMinimum() != minimum) 
-			slidern.setMinimum(minimum);
+	public void setPopulationSizeMinimum(int minimum) {
+		if (sliderPopulationSize.getMinimum() != minimum) 
+			sliderPopulationSize.setMinimum(minimum);
 	}
 	
-	public void setMaximumn(int maximum) {
-		if (slidern.getMaximum() != maximum) 
-			slidern.setMaximum(maximum);
+	public void setPopulationSizeMaximum(int maximum) {
+		if (sliderPopulationSize.getMaximum() != maximum) 
+			sliderPopulationSize.setMaximum(maximum);
+	}
+	public void setSampleSizeMinimum(int minimum) {
+		if (sliderSampleSize.getMinimum() != minimum) 
+			sliderSampleSize.setMinimum(minimum);
+	}
+	
+	public void setSampleSizeMaximum(int maximum) {
+		if (sliderSampleSize.getMaximum() != maximum) 
+			sliderSampleSize.setMaximum(maximum);
 	}
 	public void addGraphListener(View listener) {
 		txtN.addKeyListener(listener);
@@ -288,8 +295,20 @@ public class ParameterPanel extends JPanel{
 		txtUpperB.addKeyListener(listener);
 		
 		// sliderX.addChangeListener(listener);
-		sliderK.addChangeListener(listener);
-		slidern.addChangeListener(listener);
+		sliderPopulationSize.addChangeListener(listener);
+		sliderSampleSize.addChangeListener(listener);
+	}
+
+	public GenerationType getGenerationType() {
+		String data = (String)cmbxType.getSelectedItem();
+		switch(data){
+			default:
+			case "Normal": return GenerationType.Normal;
+			case "Bimodal": return GenerationType.Bimodal;
+			case "Skewed": return GenerationType.Skewed;
+			case "Uniform": return GenerationType.Uniform;
+			case "Random": return GenerationType.Random;
+		}
 	}
 
 }

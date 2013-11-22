@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.FlowLayout;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -16,6 +15,7 @@ public class MainPanel extends JPanel{
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		JPanel graphPanels = new JPanel();
+		graphPanels.setLayout(new BoxLayout(graphPanels, BoxLayout.Y_AXIS));
 		
 		GraphPanel.PopulationGraph = populationGraphPanel = new GraphPanel("Population Distribution");
 		graphPanels.add(populationGraphPanel);

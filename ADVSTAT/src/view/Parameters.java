@@ -10,21 +10,14 @@ public class Parameters {
 	
 	private GenerationType type;
 	
-	private int sliderMinimum;
-	
-	public Parameters(int n, int N, int u, int l, int sliderMinimum, int sliderMaximum, GenerationType type) {
+	public Parameters(int n, int N, int u, int l, GenerationType type) {
 		super();
 		this.n = n;
 		this.N = N;
 		this.u = u;
 		this.l = l;
-		this.sliderMinimum = sliderMinimum;
-		this.sliderMaximum = sliderMaximum;
 		this.type = type;
 	}
-	
-	private int sliderMaximum;
-	
 	
 	public int getSmallN() {
 		return n;
@@ -44,12 +37,6 @@ public class Parameters {
 	}
 	public void setL(int l) {
 		this.l = l;
-	}
-	public int getMinimum() {
-		return sliderMinimum;
-	}
-	public int getMaximum() {
-		return sliderMaximum;
 	}
 	public GenerationType getType() {
 		return type;
