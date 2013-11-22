@@ -28,17 +28,20 @@ public class NormalStrategy extends GenerationStrategy{
 			//System.out.println(data[i]);
 		}
 		*/
+		int central = 10;
 		for(int i = 0; i < populationSize; i++){
-			temp = generateRandom(lowerBound, upperBound);
-			data[i] = getMean(temp);
+			temp = generateRandom(central, lowerBound, upperBound);
+			data[i] = (int)getMean(temp);
 		}
 		ArrayList<Double> dobol = new ArrayList<Double>();
 		for (int i = 0; i < data.length; i++) {
 			dobol.add(data[i]);
 		}
 		Collections.sort(dobol);
+		
 		for (int i = 0; i < dobol.size(); i++) {
-			System.out.println(dobol.get(i));
+			data[i] = dobol.get(i);
+			System.out.println(data[i]);
 		}
 		
 		return data;
@@ -85,11 +88,11 @@ public class NormalStrategy extends GenerationStrategy{
 		return sum / data.length;
 	}
 	
-	private double[] generateRandom(int lowerBound, int upperBound) {
+	private double[] generateRandom(int central, int lowerBound, int upperBound) {
 		Random rand = new Random();
-		double[] data = new double[populationSize];
-		for(int i = 0; i < populationSize; i++)
-			data[i] = (double)lowerBound + rand.nextInt(upperBound - lowerBound);
+		double[] data = new double[central];
+		for(int i = 0; i < central; i++)
+			data[i] = (double)lowerBound + /*rand.nextInt(upperBound - lowerBound)*/ rand.nextDouble() * (upperBound - lowerBound);
 		
 		return data;
 	}
