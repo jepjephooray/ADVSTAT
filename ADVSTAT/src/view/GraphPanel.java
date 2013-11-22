@@ -1,27 +1,19 @@
 package view;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.CategoryAxis;
-import org.jfree.chart.axis.NumberAxis;
-import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.title.LegendTitle;
-import org.jfree.chart.title.TextTitle;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.general.DatasetUtilities;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.ui.VerticalAlignment;
 
 
 public class GraphPanel extends JPanel{
@@ -35,8 +27,9 @@ public class GraphPanel extends JPanel{
 		/**
 		 * Panel initialization
 		 */
-		setPreferredSize(new Dimension(600, 400));
+		setPreferredSize(new Dimension(500, 300));
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		setBorder(BorderFactory.createEtchedBorder());
 		
 
 		/**
@@ -53,6 +46,7 @@ public class GraphPanel extends JPanel{
 		final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 	//	final JFreeChart chart = createChart(dataset, title);
         final JFreeChart chart = generateBarChart(dataset, title);
+        chart.setBackgroundPaint(getBackground());
 		final ChartPanel chartPanel = new ChartPanel(chart);
         add(chartPanel);
 	}
@@ -141,6 +135,6 @@ public class GraphPanel extends JPanel{
 	}
 	
 	public void updateDomain(final CategoryDataset dataset){
-		plot.setDataset(dataset);
+		// plot.setDataset(dataset);
 	}
 }

@@ -1,4 +1,5 @@
 package view;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -28,6 +29,7 @@ public class View extends JFrame implements ChangeListener, KeyListener{
 	MainPanel mainPanel;
 	ViewTable table;
 	private GraphUpdateListener listener;
+	private static final boolean HideParameterPanelWhenError = true;
 	
 	
 	
@@ -37,8 +39,8 @@ public class View extends JFrame implements ChangeListener, KeyListener{
 	 */
 	public View(){ 
 		super("Sampling Distribution");
-		
-		
+		setResizable(false);
+		setPreferredSize(new Dimension(900,800));
 		// JMenu
 		JMenuBar menu = new JMenuBar();
 		setJMenuBar(menu);
@@ -81,6 +83,8 @@ public class View extends JFrame implements ChangeListener, KeyListener{
 		setLocationRelativeTo(null);
 		setVisible(true);
 		requestFocus();
+		
+		
 	}
 
 	/* =======================================================================================
@@ -114,23 +118,35 @@ public class View extends JFrame implements ChangeListener, KeyListener{
 		try {
 			ParameterPanel parameterPanel = mainPanel.parameterPanel;
 			parameterPanel.clearErrors();
-			int n = parameterPanel.getn(src);
 			int u = parameterPanel.getUpperB();
 			int l = parameterPanel.getLowerB();
-			int N = parameterPanel.getN();
+			int N, n;
+			N = n = 0;
+			if (src instanceof JSlider){
+				N = parameterPanel.getPopulationSize();
+				n = parameterPanel.getSampleSize();
+			}else{
+				N = parameterPanel.getN();
+				n = N-1;
+			}
+			mainPanel.parameterPanel.updatePopulation(N);
+			mainPanel.parameterPanel.updateSample(n);
 			if (parameterPanel.shouldDisplayGraph()){
 				
 				if (src instanceof JTextField){
-					parameterPanel.setMaximumK(N);
-					parameterPanel.setMaximumn(N);
+					parameterPanel.setPopulationSizeMaximum(N);
+					parameterPanel.setSampleSizeMaximum(N);
 				}
-				System.out.println(N);
-				Parameters newParam = new Parameters(n, N, u, l, parameterPanel.getMinimumK(), parameterPanel.getMaximumK(), GenerationType.Bimodal);
 				
+				Parameters newParam = new Parameters(n, N, u, l, GenerationType.Bimodal);
+				if (HideParameterPanelWhenError)mainPanel.parameterPanel.sliderPanel.setVisible(true);
 				listener.updatePerformed(new GraphUpdateEvent(src, newParam));
 			}
 		} catch(Exception e) {
+			if (HideParameterPanelWhenError)mainPanel.parameterPanel.sliderPanel.setVisible(false);
 			mainPanel.parameterPanel.clearErrors();
+			System.err.println("Nope not ready: " + e.getMessage());
+			e.printStackTrace();
 			
 		}
 	}

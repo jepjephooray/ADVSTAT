@@ -141,7 +141,7 @@ public class Model {
 		double[] data = population.getData();
 		ArrayList<Double> dobol = primitiveToObject(data); 
 		Collections.sort(dobol);
-		Double[] array = (Double[])dobol.toArray();
+		Double[] array = dobol.toArray(new Double[dobol.size()]);
 		
 		for (int i = 0; i < array.length; i++)
 			frequencyTable[0][i] = array[i];
@@ -151,9 +151,10 @@ public class Model {
 	
 	private ArrayList<Double> primitiveToObject(double[] data) {
 		ArrayList<Double> data2 = new ArrayList<Double>();
-		for (int i = 0; i < data.length; i++) {
-			data2.add(data[i]);
-		}
+		if (data != null)
+			for (int i = 0; i < data.length; i++) {
+				data2.add(new Double(data[i]));
+			}
 		return data2;
 	}
 }
