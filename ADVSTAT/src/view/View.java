@@ -115,8 +115,8 @@ public class View extends JFrame implements ChangeListener, KeyListener{
 	 */
 
 	public void Trigger(Object src) {
+		ParameterPanel parameterPanel = mainPanel.parameterPanel;
 		try {
-			ParameterPanel parameterPanel = mainPanel.parameterPanel;
 			parameterPanel.clearErrors();
 			int u = parameterPanel.getUpperB();
 			int l = parameterPanel.getLowerB();
@@ -129,8 +129,8 @@ public class View extends JFrame implements ChangeListener, KeyListener{
 				N = parameterPanel.getN();
 				n = N-1;
 			}
-			mainPanel.parameterPanel.updatePopulation(N);
-			mainPanel.parameterPanel.updateSample(n);
+			parameterPanel.updatePopulation(N);
+			parameterPanel.updateSample(n);
 			if (parameterPanel.shouldDisplayGraph()){
 				
 				if (src instanceof JTextField){
@@ -138,13 +138,13 @@ public class View extends JFrame implements ChangeListener, KeyListener{
 					parameterPanel.setSampleSizeMaximum(N);
 				}
 				
-				Parameters newParam = new Parameters(n, N, u, l, GenerationType.Bimodal);
-				if (HideParameterPanelWhenError)mainPanel.parameterPanel.sliderPanel.setVisible(true);
+				Parameters newParam = new Parameters(n, N, u, l, parameterPanel.getGenerationType());
+				if (HideParameterPanelWhenError)parameterPanel.sliderPanel.setVisible(true);
 				listener.updatePerformed(new GraphUpdateEvent(src, newParam));
 			}
 		} catch(Exception e) {
-			if (HideParameterPanelWhenError)mainPanel.parameterPanel.sliderPanel.setVisible(false);
-			mainPanel.parameterPanel.clearErrors();
+			if (HideParameterPanelWhenError)parameterPanel.sliderPanel.setVisible(false);
+			parameterPanel.clearErrors();
 			System.err.println("Nope not ready: " + e.getMessage());
 			e.printStackTrace();
 			

@@ -17,6 +17,8 @@ import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 import javax.swing.event.ChangeListener;
 
+import model.Model.GenerationType;
+
 import org.jdesktop.swingx.JXFormattedTextField;
 import org.jdesktop.swingx.JXTextField;
 import org.jfree.data.category.CategoryDataset;
@@ -59,7 +61,7 @@ public class ParameterPanel extends JPanel{
 		cmbxType = new JComboBox<String>();
 		cmbxType.setPreferredSize(lblLongSize);
 		cmbxType.addItem("Normal");
-		cmbxType.addItem("Bimodial");
+		cmbxType.addItem("Bimodal");
 		cmbxType.addItem("Skewed");
 		cmbxType.addItem("Uniform");
 		cmbxType.addItem("Random");
@@ -295,6 +297,18 @@ public class ParameterPanel extends JPanel{
 		// sliderX.addChangeListener(listener);
 		sliderPopulationSize.addChangeListener(listener);
 		sliderSampleSize.addChangeListener(listener);
+	}
+
+	public GenerationType getGenerationType() {
+		String data = (String)cmbxType.getSelectedItem();
+		switch(data){
+			default:
+			case "Normal": return GenerationType.Normal;
+			case "Bimodal": return GenerationType.Bimodal;
+			case "Skewed": return GenerationType.Skewed;
+			case "Uniform": return GenerationType.Uniform;
+			case "Random": return GenerationType.Random;
+		}
 	}
 
 }
