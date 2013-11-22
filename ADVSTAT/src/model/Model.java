@@ -89,17 +89,17 @@ public class Model {
 		}
 		return data;
 	}
+	*/
 	
-	
-	public ArrayList<Integer> generateDiscreteRandom(int size, int lower, int upper){
+	public ArrayList<Double> generateRandomData(int size, int lower, int upper){
 		Random rand = new Random();
-		ArrayList<Integer> data = new ArrayList<Integer>();
+		ArrayList<Double> data = new ArrayList<Double>();
 		for(int i = 0; i < size; i++)
-			data.add(lower + rand.nextInt(upper+1));
+			data.add((double)lower + rand.nextInt(upper+1));
 		return data;
 		
 	}
-	
+	/*
 	public double getMean(ArrayList<Double> data){
 		double sum = 0;
 		for(int i = 0; i < data.size(); i++)
