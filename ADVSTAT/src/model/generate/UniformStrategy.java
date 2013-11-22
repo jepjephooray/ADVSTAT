@@ -2,6 +2,8 @@ package model.generate;
 
 import java.util.Random;
 
+import org.jfree.data.category.DefaultCategoryDataset;
+
 import view.Parameters;
 
 public class UniformStrategy extends GenerationStrategy{
@@ -19,5 +21,21 @@ public class UniformStrategy extends GenerationStrategy{
 		
 		return data;
 		
+	}
+	
+	public DefaultCategoryDataset Generate2() {
+		Random rand = new Random();
+		DefaultCategoryDataset data = new DefaultCategoryDataset();
+		
+		// generate population data at the start of program (when user enters N, L, and U)
+		// generate 
+		
+		//data.set
+		/*
+		 * data.setValue( frequency, "Frequency", "Interval")
+		 * data.setValue( 5, "Frequency", "5.0-5.5")
+		 */
+		
+		return data;
 	}
 }

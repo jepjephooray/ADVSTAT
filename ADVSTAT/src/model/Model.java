@@ -13,6 +13,7 @@ import model.generate.RandomStrategy;
 import model.generate.SkewedStrategy;
 import model.generate.UniformStrategy;
 
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.paukov.combinatorics.Factory;
 import org.paukov.combinatorics.Generator;
 import org.paukov.combinatorics.ICombinatoricsVector;
@@ -21,7 +22,7 @@ import view.Parameters;
 
 public class Model {
 	
-	public enum GenerationType {
+	public static enum GenerationType {
 		Uniform,
 		Bimodal,
 		Normal,
