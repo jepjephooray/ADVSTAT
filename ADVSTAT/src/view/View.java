@@ -130,7 +130,7 @@ public class View extends JFrame implements ChangeListener, KeyListener, ActionL
 				n = parameterPanel.getSampleSize();
 			}else{
 				N = parameterPanel.getN();
-				n = N-1;
+				n = 1;
 			}
 			parameterPanel.updatePopulation(N);
 			parameterPanel.updateSample(n);
