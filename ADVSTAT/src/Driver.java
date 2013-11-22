@@ -1,6 +1,7 @@
 import model.Model;
 import model.generate.BimodalStrategy;
 import model.generate.NormalStrategy;
+import model.generate.UniformStrategy;
 import view.Parameters;
 import view.View;
 import controller.Controller;
@@ -27,12 +28,15 @@ public class Driver {
 		//controller.display();
 		Controller controller = new Controller(model, view);
 		
-		//new Parameters(n, N, u, l, sliderMinimum, sliderMaximum, type)
-		//Parameters param = new Parameters(5, 30, 20, 0, 5, 10, Model.GenerationType.Normal);
+		//new Parameters(n, N, u, l, type)
+		Parameters param = new Parameters(5, 20, 5, 0, Model.GenerationType.Normal);
 		//NormalStrategy normStrat = new NormalStrategy(param);
 		//normStrat.Generate();
 		//BimodalStrategy bimodal = new BimodalStrategy(param);
 		//bimodal.Generate();
+		UniformStrategy uniform = new UniformStrategy(param);
+		uniform.Generate();
+		
 	}
 	
 	
