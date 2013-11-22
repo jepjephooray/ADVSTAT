@@ -54,18 +54,18 @@ public class GraphPanel extends JPanel{
 
 	  public static JFreeChart generateBarChart(DefaultCategoryDataset dataset, String title) {
 	        DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
-	        dataSet.setValue(791, "Population", "1750 AD");
-	        dataSet.setValue(978, "Population", "1800 AD");
-	        dataSet.setValue(1262, "Population", "1850 AD");
-	        dataSet.setValue(1650, "Population", "1900 AD");
-	        dataSet.setValue(2519, "Population", "1950 AD");
-	        dataSet.setValue(6071, "Population", "2000 AD");
-	        dataSet.setValue(6072, "Population", "2001 AD");
-	        dataSet.setValue(6073, "Population", "2002 AD");
+	        dataSet.setValue(5, "Population", "1");
+	        dataSet.setValue(7, "Population", "2");
+	        dataSet.setValue(12, "Population", "3");
+	        dataSet.setValue(15, "Population", "4");
+	        dataSet.setValue(14, "Population", "5");
+	        dataSet.setValue(6, "Population", "6");
+	        dataSet.setValue(3, "Population", "7");
+	        dataSet.setValue(1, "Population", "8");
 	        
 	        
 	     final JFreeChart chart = ChartFactory.createBarChart(
-	                title, "Year", "Population in millions",
+	                title, "X", "Frequency",
 	                dataSet, PlotOrientation.VERTICAL, false, true, false);
 	 /*
 	     LegendTitle legend = chart.getLegend(); 
