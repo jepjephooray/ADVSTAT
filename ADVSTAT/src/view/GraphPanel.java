@@ -46,6 +46,7 @@ public class GraphPanel extends JPanel{
 		final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 	//	final JFreeChart chart = createChart(dataset, title);
         final JFreeChart chart = generateBarChart(dataset, title);
+        plot = chart.getCategoryPlot();
         chart.setBackgroundPaint(getBackground());
 		final ChartPanel chartPanel = new ChartPanel(chart);
         add(chartPanel);
@@ -65,8 +66,10 @@ public class GraphPanel extends JPanel{
 	        
 	        
 	     final JFreeChart chart = ChartFactory.createBarChart(
-	                title, "X", "Frequency",
+	                title, "Sample mean", "Frequency",
 	                dataSet, PlotOrientation.VERTICAL, false, true, false);
+	     
+	     
 	 /*
 	     LegendTitle legend = chart.getLegend(); 
 	     Font nwfont=new Font("Arial",0,7); 
@@ -135,6 +138,6 @@ public class GraphPanel extends JPanel{
 	}
 	
 	public void updateDomain(final CategoryDataset dataset){
-		// plot.setDataset(dataset);
+		plot.setDataset(dataset);
 	}
 }

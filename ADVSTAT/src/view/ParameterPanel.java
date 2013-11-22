@@ -262,7 +262,9 @@ public class ParameterPanel extends JPanel{
 
 	public void setSample(int n) {
 		if (n > sliderPopulationSize.getValue())
-			n = sliderPopulationSize.getValue(); 
+			n = sliderPopulationSize.getValue();
+		else if (n < 0)
+			n = 1;
 		
 		sliderSampleSize.setValue(n);
 		

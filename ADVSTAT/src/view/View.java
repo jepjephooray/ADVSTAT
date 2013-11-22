@@ -19,6 +19,7 @@ import javax.swing.event.ChangeListener;
 
 
 import model.Model.GenerationType;
+import model.Sample;
 
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetUtilities;
@@ -104,7 +105,7 @@ public class View extends JFrame implements ChangeListener, KeyListener, ActionL
 			
 			if (src instanceof JSlider){
 				int N = parameterPanel.getPopulationSize();
-				int n = parameterPanel.getSampleSize();
+				int n = Sample.Size = parameterPanel.getSampleSize();
 				parameterPanel.updatePopulation(N);
 				parameterPanel.updateSample(n);
 			}
@@ -134,14 +135,13 @@ public class View extends JFrame implements ChangeListener, KeyListener, ActionL
 			int N, n;
 
 			N = parameterPanel.getN();
-			n = 1;
 			parameterPanel.setPopulation(N);
-			parameterPanel.setSample(n);
+			parameterPanel.setSample(Sample.Size);
 			parameterPanel.updatePopulation(N);
-			parameterPanel.updateSample(n);
+			parameterPanel.updateSample(Sample.Size);
 			if (parameterPanel.shouldDisplayGraph()){
 				
-				Parameters newParam = new Parameters(n, N, u, l, parameterPanel.getGenerationType());
+				Parameters newParam = new Parameters(Sample.Size, N, u, l, parameterPanel.getGenerationType());
 				if (HideParameterPanelWhenError)parameterPanel.sliderPanel.setVisible(true);
 				listener.updatePerformed(new GraphUpdateEvent(src, newParam));
 			}
