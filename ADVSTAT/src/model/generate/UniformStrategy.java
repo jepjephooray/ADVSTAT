@@ -12,7 +12,6 @@ public class UniformStrategy extends GenerationStrategy{
 		super(param);
 	}
 	
-	
 	public double[] Generate(){
 		Random rand = new Random();
 		double[] data = new double[populationSize];

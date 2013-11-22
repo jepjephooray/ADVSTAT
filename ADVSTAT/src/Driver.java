@@ -30,12 +30,12 @@ public class Driver {
 		
 		//new Parameters(n, N, u, l, type)
 		Parameters param = new Parameters(5, 20, 5, 0, Model.GenerationType.Normal);
-		//NormalStrategy normStrat = new NormalStrategy(param);
-		//normStrat.Generate();
+		NormalStrategy normStrat = new NormalStrategy(param);
+		normStrat.Generate();
 		//BimodalStrategy bimodal = new BimodalStrategy(param);
 		//bimodal.Generate();
-		UniformStrategy uniform = new UniformStrategy(param);
-		uniform.Generate();
+		//UniformStrategy uniform = new UniformStrategy(param);
+		//uniform.Generate();
 		
 	}
 	
