@@ -15,13 +15,13 @@ public class MainPanel extends JPanel{
 	public MainPanel(){
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		JPanel graphPanels = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+		JPanel graphPanels = new JPanel();
 		
 		GraphPanel.PopulationGraph = populationGraphPanel = new GraphPanel("Population Distribution");
 		graphPanels.add(populationGraphPanel);
 		
 		GraphPanel.SamplingGraph = samplingGraphPanel = new GraphPanel("Sampling Distribution");
-		graphPanels.add(populationGraphPanel);
+		graphPanels.add(samplingGraphPanel);
 	
 		parameterPanel = new ParameterPanel();
 		
@@ -31,8 +31,7 @@ public class MainPanel extends JPanel{
 	}
 
 	public void addGraphListener(View view) {
-		parameterPanel.addKeyListener(view);
-		parameterPanel.addChangeListener(view);
+		parameterPanel.addGraphListener(view);
 	}
 
 	public void updatePopulationDomain(CategoryDataset dataset) {

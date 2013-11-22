@@ -36,7 +36,7 @@ public class View extends JFrame implements ChangeListener, KeyListener{
 	 * =======================================================================================
 	 */
 	public View(){ 
-		super("Hypergeometric Probability Distribution");
+		super("Sampling Distribution");
 		
 		
 		// JMenu
@@ -55,7 +55,7 @@ public class View extends JFrame implements ChangeListener, KeyListener{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "This software was developed by Darren Sapalo, Marvin Bables, and Roberto Cruz for submission to ST-STAT.");
+				JOptionPane.showMessageDialog(null, "This software was developed by Darren Sapalo, Marvin Bables, and Jefferson Cordero for submission to ADVSTAT.");
 			}
 		});
 		

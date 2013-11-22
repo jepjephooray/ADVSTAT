@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.BoxLayout;
@@ -32,7 +33,9 @@ public class GraphPanel extends JPanel{
 		/**
 		 * Panel initialization
 		 */
+		setPreferredSize(new Dimension(400, 300));
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		
 
 		/**
 		 * Chart initialization

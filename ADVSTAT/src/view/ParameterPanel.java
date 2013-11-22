@@ -35,9 +35,10 @@ public class ParameterPanel extends JPanel{
 	private JComboBox<String> cmbxType;
 	
 	public ParameterPanel() {
-		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-
+		JPanel formPanel = new JPanel(); 
+		
 		Dimension lblSize = new Dimension(10, 30);
 		Dimension txtSize = new Dimension(35, 30);
 		Dimension lblLongSize = new Dimension(85, 30);
@@ -79,29 +80,28 @@ public class ParameterPanel extends JPanel{
 		
 		JLabel lblType = new JLabel("Type");
 		
-		add(lblN);
-		add(txtN);
+		formPanel.add(lblN);
+		formPanel.add(txtN);
 		
-		add(Box.createRigidArea(new Dimension(45, 30)));
-		
-		add(lbln);
-		add(txtn);
+	//	formPanel.add(Box.createRigidArea(new Dimension(45, 30)));
+		formPanel.add(lbln);
+		formPanel.add(txtn);
 				
-		add(Box.createRigidArea(new Dimension(45, 30)));
+		formPanel.add(Box.createRigidArea(new Dimension(45, 30)));
 		
-		add(lblLow);
-		add(txtLowerB);
+		formPanel.add(lblLow);
+		formPanel.add(txtLowerB);
 		
-		add(lblUp);
-		add(txtUpperB);
+		formPanel.add(lblUp);
+		formPanel.add(txtUpperB);
 	
-		add(lblType);
-		add(cmbxType);
+		formPanel.add(lblType);
+		formPanel.add(cmbxType);
 		
 		lblError = new JLabel("");
 		lblError.setForeground(Color.red);
 		
-		add(lblError);
+		formPanel.add(lblError);
 
 		JPanel sliderContainer = new JPanel();
 		sliderContainer.setBorder(BorderFactory.createTitledBorder("Input"));
@@ -149,6 +149,9 @@ public class ParameterPanel extends JPanel{
 		slidern.setPreferredSize(new Dimension(300, 30));
 		slidern.setPaintLabels(true);
 		sliderContainer.add(slidern);
+		
+		add(formPanel);
+		add(sliderContainer);
 	}
 	public int getn(Object src) throws Exception{
 		if (src != null && src.equals(slidern)){
@@ -180,11 +183,11 @@ public class ParameterPanel extends JPanel{
 	}
 	
 	
-	public boolean isInputValid(int type) {
+	public boolean isInputValid(int type) throws Exception {
 		Object singleX[];
 		Object rangeX[];
 		try {
-		Object _singleX[] = {txtn, txtN, getUpperB()};
+		Object _singleX[] = {txtn, txtN};
 		
 		singleX = _singleX;
 		}catch(Exception e){
@@ -209,12 +212,18 @@ public class ParameterPanel extends JPanel{
 				valid = false;
 			}
 		}
+		if(this.getLowerB() > this.getUpperB()){
+			txtLowerB.setBackground(Color.pink);
+			txtUpperB.setBackground(Color.pink);
+		}
 		return valid;
 	}
 	
 	public void clearErrors() {
 		txtn.setBackground(Color.white);
 		txtN.setBackground(Color.white);
+		txtLowerB.setBackground(Color.white);
+		txtUpperB.setBackground(Color.white);
 		hasError = false;
 		
 		
