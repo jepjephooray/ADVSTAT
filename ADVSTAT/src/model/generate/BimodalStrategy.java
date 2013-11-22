@@ -15,33 +15,30 @@ public class BimodalStrategy extends GenerationStrategy{
 
 	public double[] Generate(){
 		
-		double data[] = new double[populationSize];
+		ArrayList<Double> data = new ArrayList<Double>();
 		double temp[] = null;
 		int central = 10;
 		for (int i = 0; i < populationSize; i++) {
 			if(i < populationSize/2) {
 				temp = generateRandom(central, lowerBound, (lowerBound + upperBound)/2);
-				data[i] = (int)getMean(temp);
+				data.add(getMean(temp));
 				System.out.print("first: ");
 			}
 			else {
 				temp = generateRandom(central, lowerBound, upperBound);
-				data[i] = (int)getMean(temp);
+				data.add(getMean(temp));
 				System.out.print("2nd: ");
 			}
 			
-			System.out.println(data[i]);
+			System.out.println(data.get(i));
 		}
 		
-		ArrayList<Double> dobol = new ArrayList<Double>();
-		for (int i = 0; i < data.length; i++) {
-			dobol.add(data[i]);
-		}
-		Collections.sort(dobol);
+		Collections.sort(data);
 		
-		for (int i = 0; i < dobol.size(); i++) {
-			data[i] = dobol.get(i);
-			System.out.println(data[i]);
+		double[] data2 = new double[data.size()];
+		for (int i = 0; i < data.size(); i++) {
+			data2[i] = data.get(i);
+			System.out.println(data2[i]);
 		}
 		/*
 		double firsthalfdata[] = new double[populationSize/2];
@@ -64,7 +61,7 @@ public class BimodalStrategy extends GenerationStrategy{
 		System.out.println("mean of second: " + getMean(secondhalfdata));
 		*/
 		
-		return null;
+		return data2;
 	}
 	
 	private double getMean(double[] data) {
