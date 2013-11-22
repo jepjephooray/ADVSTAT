@@ -99,7 +99,15 @@ public class View extends JFrame implements ChangeListener, KeyListener, ActionL
 	
 
 		public void stateChanged(ChangeEvent e) {
-			Trigger(e.getSource());	
+			Object src = e.getSource();
+			ParameterPanel parameterPanel = mainPanel.parameterPanel;
+			
+			if (src instanceof JSlider){
+				int N = parameterPanel.getPopulationSize();
+				int n = parameterPanel.getSampleSize();
+				parameterPanel.updatePopulation(N);
+				parameterPanel.updateSample(n);
+			}
 		}
 		public void keyReleased(KeyEvent evt) {
 			// Trigger(evt.getSource());
@@ -124,22 +132,14 @@ public class View extends JFrame implements ChangeListener, KeyListener, ActionL
 			int u = parameterPanel.getUpperB();
 			int l = parameterPanel.getLowerB();
 			int N, n;
-			N = n = 0;
-			if (src instanceof JSlider){
-				N = parameterPanel.getPopulationSize();
-				n = parameterPanel.getSampleSize();
-			}else{
-				N = parameterPanel.getN();
-				n = 1;
-			}
+
+			N = parameterPanel.getN();
+			n = 1;
+			parameterPanel.setPopulation(N);
+			parameterPanel.setSample(n);
 			parameterPanel.updatePopulation(N);
 			parameterPanel.updateSample(n);
 			if (parameterPanel.shouldDisplayGraph()){
-				
-				if (src instanceof JTextField){
-					parameterPanel.setPopulationSizeMaximum(N);
-					parameterPanel.setSampleSizeMaximum(N);
-				}
 				
 				Parameters newParam = new Parameters(n, N, u, l, parameterPanel.getGenerationType());
 				if (HideParameterPanelWhenError)parameterPanel.sliderPanel.setVisible(true);

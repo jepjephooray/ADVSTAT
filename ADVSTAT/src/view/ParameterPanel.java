@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -33,6 +34,7 @@ public class ParameterPanel extends JPanel{
 	public JPanel sliderPanel;
 	private JPanel sliderContainerPopulationSize;
 	private JPanel sliderContainerSampleSize;
+	private JButton lblButton;
 	
 	public ParameterPanel() {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -53,6 +55,7 @@ public class ParameterPanel extends JPanel{
 		txtUpperB.setPreferredSize(lblLongSize);
 		
 		cmbxType = new JComboBox<String>();
+		cmbxType.setToolTipText("Data generation");
 		cmbxType.setPreferredSize(lblLongSize);
 		cmbxType.addItem("Normal");
 		cmbxType.addItem("Bimodal");
@@ -83,10 +86,15 @@ public class ParameterPanel extends JPanel{
 		formPanel.add(txtUpperB);
 		
 	
-		formPanel.add(lblType);
+		// formPanel.add(lblType);
 		formPanel.add(cmbxType);
 		
-		lblError = new JLabel("Test error here");
+
+		lblButton = new JButton("Generate");
+		lblButton.setPreferredSize(lblLongSize);
+		formPanel.add(lblButton);		
+		
+		lblError = new JLabel("errors here");
 		lblError.setForeground(Color.red);
 		lblError.setPreferredSize(lblLongSize);
 		formPanel.add(lblError);
@@ -134,7 +142,7 @@ public class ParameterPanel extends JPanel{
 	public void updatePopulation(int population){
 		sliderContainerPopulationSize.setBorder(null);
 		sliderContainerPopulationSize.setBorder(BorderFactory.createTitledBorder("Population size: " + population));
-		
+		txtN.setText("" + population);
 		
 	}
 	
@@ -244,11 +252,6 @@ public class ParameterPanel extends JPanel{
 		return hasError == false;
 	}
 	
-	public void addChangeListener(ChangeListener listener){
-		sliderPopulationSize.addChangeListener(listener);
-		sliderSampleSize.addChangeListener(listener);
-	}
-	
 	public int getPopulationSize() {
 		return sliderPopulationSize.getValue();
 	}
@@ -256,33 +259,22 @@ public class ParameterPanel extends JPanel{
 	public int getSampleSize() {
 		return sliderSampleSize.getValue();
 	}
-	
-	public int getPopulationSizeMinimum() {
-		return sliderPopulationSize.getMinimum();
+
+	public void setSample(int n) {
+		if (n > sliderPopulationSize.getValue())
+			n = sliderPopulationSize.getValue(); 
+		
+		sliderSampleSize.setValue(n);
+		
 	}
-	
-	public int getPopulationSizeMaximum() {
-		return sliderPopulationSize.getMaximum();
-	}
-	
-	public void setPopulationSizeMinimum(int minimum) {
-		if (sliderPopulationSize.getMinimum() != minimum) 
-			sliderPopulationSize.setMinimum(minimum);
-	}
-	
-	public void setPopulationSizeMaximum(int maximum) {
-		if (sliderPopulationSize.getMaximum() != maximum) 
-			sliderPopulationSize.setMaximum(maximum);
-	}
-	public void setSampleSizeMinimum(int minimum) {
-		if (sliderSampleSize.getMinimum() != minimum) 
-			sliderSampleSize.setMinimum(minimum);
-	}
-	
-	public void setSampleSizeMaximum(int maximum) {
-		if (sliderSampleSize.getMaximum() != maximum) 
-			sliderSampleSize.setMaximum(maximum);
-	}
+
+	public void setPopulation(int n) {
+		sliderSampleSize.setMaximum(n);
+		sliderPopulationSize.setMaximum(n);
+		
+		sliderPopulationSize.setValue(n);
+		
+	}	
 	public void addGraphListener(View listener) {
 		txtN.addKeyListener(listener);
 		txtLowerB.addKeyListener(listener);
@@ -292,7 +284,9 @@ public class ParameterPanel extends JPanel{
 		sliderPopulationSize.addChangeListener(listener);
 		sliderSampleSize.addChangeListener(listener);
 		
-		cmbxType.addActionListener(listener);
+		// cmbxType.addActionListener(listener);
+		
+		lblButton.addActionListener(listener);
 	}
 
 	public GenerationType getGenerationType() {
@@ -306,5 +300,6 @@ public class ParameterPanel extends JPanel{
 			case "Random": return GenerationType.Random;
 		}
 	}
+
 
 }
