@@ -1,27 +1,21 @@
 package view;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
-import javax.swing.border.BevelBorder;
 import javax.swing.event.ChangeListener;
 
 import model.Model.GenerationType;
 
 import org.jdesktop.swingx.JXFormattedTextField;
-import org.jdesktop.swingx.JXTextField;
-import org.jfree.data.category.CategoryDataset;
 
 public class ParameterPanel extends JPanel{
 	public static final int DEFAULT_N = 1;
@@ -297,6 +291,8 @@ public class ParameterPanel extends JPanel{
 		// sliderX.addChangeListener(listener);
 		sliderPopulationSize.addChangeListener(listener);
 		sliderSampleSize.addChangeListener(listener);
+		
+		cmbxType.addActionListener(listener);
 	}
 
 	public GenerationType getGenerationType() {

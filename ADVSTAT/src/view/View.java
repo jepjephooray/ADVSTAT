@@ -25,7 +25,7 @@ import org.jfree.data.general.DatasetUtilities;
 
 
 
-public class View extends JFrame implements ChangeListener, KeyListener{
+public class View extends JFrame implements ChangeListener, KeyListener, ActionListener{
 	MainPanel mainPanel;
 	ViewTable table;
 	private GraphUpdateListener listener;
@@ -102,9 +102,12 @@ public class View extends JFrame implements ChangeListener, KeyListener{
 			Trigger(e.getSource());	
 		}
 		public void keyReleased(KeyEvent evt) {
-			Trigger(evt.getSource());
+			// Trigger(evt.getSource());
 		}
-	
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Trigger(e.getSource());
+		}
 		
 		public void keyPressed(KeyEvent evt) {}		
 		public void keyTyped(KeyEvent evt) {}
@@ -127,7 +130,7 @@ public class View extends JFrame implements ChangeListener, KeyListener{
 				n = parameterPanel.getSampleSize();
 			}else{
 				N = parameterPanel.getN();
-				n = N-1;
+				n = 1;
 			}
 			parameterPanel.updatePopulation(N);
 			parameterPanel.updateSample(n);
@@ -158,7 +161,7 @@ public class View extends JFrame implements ChangeListener, KeyListener{
 	        mainPanel.updatePopulationDomain(dataset);
 	        table.updateTable(data);
 	}
-	
+
 	
 	
 }
