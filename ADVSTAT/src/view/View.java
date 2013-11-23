@@ -139,8 +139,8 @@ public class View extends JFrame implements ChangeListener, KeyListener, ActionL
 			parameterPanel.setSample(Sample.Size);
 			parameterPanel.updatePopulation(N);
 			parameterPanel.updateSample(Sample.Size);
-			if (parameterPanel.shouldDisplayGraph()){
-				
+			
+			if (parameterPanel.isInputValid() && parameterPanel.shouldDisplayGraph()){
 				Parameters newParam = new Parameters(Sample.Size, N, u, l, parameterPanel.getGenerationType());
 				if (HideParameterPanelWhenError)parameterPanel.sliderPanel.setVisible(true);
 				listener.updatePerformed(new GraphUpdateEvent(src, newParam));
@@ -148,8 +148,7 @@ public class View extends JFrame implements ChangeListener, KeyListener, ActionL
 		} catch(Exception e) {
 			if (HideParameterPanelWhenError)parameterPanel.sliderPanel.setVisible(false);
 			parameterPanel.clearErrors();
-			System.err.println("Nope not ready: " + e.getMessage());
-			e.printStackTrace();
+			parameterPanel.setError(e.getMessage());
 			
 		}
 	}

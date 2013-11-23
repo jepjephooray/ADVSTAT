@@ -34,25 +34,27 @@ public class ParameterPanel extends JPanel{
 	public JPanel sliderPanel;
 	private JPanel sliderContainerPopulationSize;
 	private JPanel sliderContainerSampleSize;
-	private JButton lblButton;
+	private JButton btnGenerate;
+	private JButton btnGraph;
 	
 	public ParameterPanel() {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		JPanel formPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10)); 
+		JPanel formPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5)); 
 		
 		Dimension lblSize = new Dimension(20, 50);
-		Dimension txtSize = new Dimension(35, 30);
-		Dimension lblLongSize = new Dimension(120, 30);
+		Dimension txtSize = new Dimension(70, 30);
+		Dimension lblLongSize = new Dimension(100, 30);
+		Dimension lblLongerSize = new Dimension(190, 30);
 		
 		txtN = new JXFormattedTextField("Population size");
-		txtN.setPreferredSize(lblLongSize);
+		txtN.setPreferredSize(txtSize);
 		
 		txtLowerB = new JXFormattedTextField("Lower bound");
-		txtLowerB.setPreferredSize(lblLongSize);
+		txtLowerB.setPreferredSize(txtSize);
 		
 		txtUpperB = new JXFormattedTextField("Upper bound");
-		txtUpperB.setPreferredSize(lblLongSize);
+		txtUpperB.setPreferredSize(txtSize);
 		
 		cmbxType = new JComboBox<String>();
 		cmbxType.setToolTipText("Data generation");
@@ -90,14 +92,20 @@ public class ParameterPanel extends JPanel{
 		formPanel.add(cmbxType);
 		
 
-		lblButton = new JButton("Generate");
-		lblButton.setPreferredSize(lblLongSize);
-		formPanel.add(lblButton);		
+		btnGenerate = new JButton("Generate population");
+		btnGenerate.setPreferredSize(lblLongerSize);
+		formPanel.add(btnGenerate);
 		
-		lblError = new JLabel("errors here");
+		btnGraph = new JButton("Graph");
+		btnGraph.setPreferredSize(lblLongSize);
+		formPanel.add(btnGraph);
+		
+
+		lblError = new JLabel("");
 		lblError.setForeground(Color.red);
-		lblError.setPreferredSize(lblLongSize);
+		lblError.setPreferredSize(lblLongerSize);
 		formPanel.add(lblError);
+		
 
 		
 		/**
@@ -136,6 +144,7 @@ public class ParameterPanel extends JPanel{
 		sliderPanel.setVisible(false);
 		
 		add(formPanel);
+
 		add(sliderPanel);
 		
 	}
@@ -154,6 +163,9 @@ public class ParameterPanel extends JPanel{
 	
 	
 	public int getN() throws Exception{
+		if (txtN.getText().equalsIgnoreCase(""))
+			throw new Exception("No population");
+		
 		int value = Integer.parseInt(txtN.getText());
 		if (value > 100)
 			value = 100;
@@ -191,39 +203,12 @@ public class ParameterPanel extends JPanel{
 		return value;
 	}
 	
-	public boolean isInputValid(int type) throws Exception {
+	public boolean isInputValid() throws Exception {
 		boolean valid = true;
-/*		Object singleX[];
-		Object rangeX[];
-		try {
-		Object _singleX[] = {lbln, txtN};
-		
-		singleX = _singleX;
-		}catch(Exception e){
-			return false;
-		}
-		
-		
-		
-		
-		clearErrors();
-		
-		for(int i = 0; i < singleX.length; i++) {
-			JTextField f = (JTextField)singleX[i];
-			try {
-				if( f.getText().equals("") || f.getText().matches("\\D") || Integer.parseInt(f.getText()) < 0) {
-					f.setBackground(Color.pink);
-					valid = false;
-				}
-			} catch(Exception e) {
-				e.printStackTrace();
-				f.setBackground(Color.pink);
-				valid = false;
-			}
-		}
-*/		if(this.getLowerB() > this.getUpperB()){
+		if(this.getLowerB() > this.getUpperB()){
 			txtLowerB.setBackground(Color.pink);
 			txtUpperB.setBackground(Color.pink);
+			throw new Exception("Invalid bounds");
 		}
 		return valid;
 	}
@@ -232,18 +217,10 @@ public class ParameterPanel extends JPanel{
 		txtN.setBackground(Color.white);
 		txtLowerB.setBackground(Color.white);
 		txtUpperB.setBackground(Color.white);
+		lblError.setVisible(false);
+		lblError.setText("");
 		hasError = false;
-		
-		
-	/*	try {
-			if (getn(null) > getN()){
-				lbln.setBackground(Color.pink);
-				hasError = true;
-			}
-		}catch (Exception e){
-			hasError = true;
-		}
-*/	}
+	}
 	
 	
 	/**
@@ -283,13 +260,9 @@ public class ParameterPanel extends JPanel{
 		txtLowerB.addKeyListener(listener);
 		txtUpperB.addKeyListener(listener);
 		
-		// sliderX.addChangeListener(listener);
 		sliderPopulationSize.addChangeListener(listener);
 		sliderSampleSize.addChangeListener(listener);
-		
-		// cmbxType.addActionListener(listener);
-		
-		lblButton.addActionListener(listener);
+		btnGenerate.addActionListener(listener);
 	}
 
 	public GenerationType getGenerationType() {
@@ -302,6 +275,11 @@ public class ParameterPanel extends JPanel{
 			case "Uniform": return GenerationType.Uniform;
 			case "Random": return GenerationType.Random;
 		}
+	}
+
+	public void setError(String message) {
+		lblError.setVisible(true);
+		lblError.setText(message);
 	}
 
 

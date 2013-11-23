@@ -98,7 +98,7 @@ public class NormalStrategy extends GenerationStrategy{
 		Random rand = new Random();
 		double[] data = new double[central];
 		for(int i = 0; i < central; i++)
-			data[i] = (double)lowerBound + rand.nextInt(upperBound - lowerBound) /*rand.nextDouble() * (upperBound - lowerBound) */ ;
+			data[i] = (double)lowerBound + rand.nextInt(upperBound - lowerBound + 1) /*rand.nextDouble() * (upperBound - lowerBound) */ ;
 		
 		return data;
 	}
