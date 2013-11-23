@@ -13,10 +13,10 @@ public class BimodalStrategy extends GenerationStrategy{
 		super(param);
 	}
 
-	public double[] GeneratePopulation(){
+	public int[] GeneratePopulation(){
 		
-		ArrayList<Double> data = new ArrayList<Double>();
-		double temp[] = null;
+		ArrayList<Integer> data = new ArrayList<Integer>();
+		int temp[] = null;
 		int central = 10;
 		for (int i = 0; i < populationSize; i++) {
 			if(i < populationSize/2) {
@@ -35,48 +35,28 @@ public class BimodalStrategy extends GenerationStrategy{
 		
 		Collections.sort(data);
 		
-		double[] data2 = new double[data.size()];
+		int[] data2 = new int[data.size()];
 		for (int i = 0; i < data.size(); i++) {
 			data2[i] = data.get(i);
 			System.out.println(data2[i]);
 		}
-		/*
-		double firsthalfdata[] = new double[populationSize/2];
-		for (int i = 0; i < firsthalfdata.length; i++) {
-			firsthalfdata[i] = data[i];
-		}
-		System.out.println("mean of first: " + getMean(firsthalfdata));
-		double secondhalfdata[] = new double[populationSize/2];
-		for (int i = 0; i < populationSize; i++) {
-			if(i > populationSize/2) {
-				for (int j = 0; j < secondhalfdata.length; j++) {
-					secondhalfdata[j] = data[i];
-					i++;
-					if(i >= populationSize)
-						break;
-				}
-				break;
-			}
-		}
-		System.out.println("mean of second: " + getMean(secondhalfdata));
-		*/
 		
 		return data2;
 	}
 	
-	private double getMean(double[] data) {
-		double sum = 0;
+	private int getMean(int[] data) {
+		int sum = 0;
 		for (int i = 0; i < data.length; i++) {
 			sum += data[i];
 		}
 		return sum / data.length;
 	}
 	
-	private double[] generateRandom(int central, int lowerBound, int upperBound) {
+	private int[] generateRandom(int central, int lowerBound, int upperBound) {
 		Random rand = new Random();
-		double[] data = new double[central];
+		int[] data = new int[central];
 		for(int i = 0; i < central; i++)
-			data[i] = (double)lowerBound + /*rand.nextInt(upperBound - lowerBound)*/ rand.nextDouble() * (upperBound - lowerBound);
+			data[i] = lowerBound + rand.nextInt(upperBound - lowerBound) /*rand.nextDouble() * (upperBound - lowerBound)*/;
 		
 		return data;
 	}

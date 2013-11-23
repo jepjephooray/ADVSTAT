@@ -10,7 +10,7 @@ public class RandomStrategy extends GenerationStrategy{
 		super(param);
 	}
 
-	public double[] GeneratePopulation(){
+	public int[] GeneratePopulation(){
 		return generateRandom(populationSize, lowerBound, upperBound);
 	}
 
@@ -21,11 +21,11 @@ public class RandomStrategy extends GenerationStrategy{
 	 * @param upperBound
 	 * @return
 	 */
-	private double[] generateRandom(int amount, int lowerBound, int upperBound) {
+	private int[] generateRandom(int amount, int lowerBound, int upperBound) {
 		Random rand = new Random();
-		double[] data = new double[amount];
+		int[] data = new int[amount];
 		for(int i = 0; i < amount; i++)
-			data[i] = (double)lowerBound + rand.nextInt(upperBound - lowerBound + 1);
+			data[i] = lowerBound + rand.nextInt(upperBound - lowerBound + 1);
 		
 		return data;
 	}

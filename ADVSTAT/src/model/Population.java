@@ -12,7 +12,7 @@ import model.generate.GenerationStrategy;
 
 
 public class Population {
-	private double[] data;
+	private int[] data;
 	private ArrayList<Sample> listOfSamples;
 	private int sampleSize;
 	
@@ -34,7 +34,7 @@ public class Population {
 		 * This part begins finding all the possible samples.
 		 * This is used for the sampling distribution
 		 */
-		ArrayList<Integer> dataList = strategy.FindAllSamplePermutations();
+		ArrayList<Integer> dataList = strategy.FindAllSamplePermutations(data);
 		ICombinatoricsVector<Integer> initialVector = Factory.createVector(dataList); 
 		Generator<Integer> generator = Factory.createPermutationWithRepetitionGenerator(initialVector, sampleSize);
 		
@@ -48,7 +48,7 @@ public class Population {
 		return listOfSamples;
 	}
 
-	public double[] getData() {
+	public int[] getData() {
 		return data;
 	}
 }

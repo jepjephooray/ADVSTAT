@@ -16,7 +16,7 @@ public abstract class GenerationStrategy {
 		upperBound = param.getU();
 		lowerBound = param.getL();
 	}
-	public abstract double[] GeneratePopulation();
+	public abstract int[] GeneratePopulation();
 	
 	/**
 	 * WRONG WRONG WRONG
@@ -24,7 +24,7 @@ public abstract class GenerationStrategy {
 	 * contains all the possible values of the population.
 	 * @return
 	 */
-	public ArrayList<Integer> FindAllSamplePermutations(){
+	public ArrayList<Integer> FindAllSamplePermutations(int[] data){
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		
 		/*
@@ -33,8 +33,20 @@ public abstract class GenerationStrategy {
 		 * 		current value = X
 		 * 			if (X is not yet in the list) add X to list
 		 */
-		
-		
+		for (int i = 0; i < data.length; i++) {
+			int x = data[i];
+			if(list.size() == 0)
+				list.add(x);
+			else {
+				boolean match = false;
+				for (int j = 0; j < list.size(); j++) {
+					if(x == list.get(j))
+						match = true;
+				}
+				if(!match)
+					list.add(x);
+			}
+		}
 		return list;
 	}
 	

@@ -189,10 +189,10 @@ public class Model {
 	}
 	
 	public CategoryDataset getPopulationFrequencyTable() {
-		double[] data = population.getData();
+		int[] data = population.getData();
 		
 		// Move to array list
-		ArrayList<Double> list = new ArrayList<Double>();
+		ArrayList<Integer> list = new ArrayList<Integer>();
 		for(int i = 0; i < data.length; i++) {
 			list.add(data[i]);
 		}

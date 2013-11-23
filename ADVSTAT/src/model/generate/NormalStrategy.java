@@ -15,22 +15,11 @@ public class NormalStrategy extends GenerationStrategy{
 	
 	
 
-	public double[] GeneratePopulation(){
+	public int[] GeneratePopulation(){
 		//Random rand = new Random();
-		ArrayList<Double> data = new ArrayList<Double>();
-		double[] temp = null;
-		/*
-		temp = generateRandom(lowerBound, upperBound);
-		double mean = getMean(temp);
-		System.out.println("mean: " + mean);
-		double variance = getVariance(temp, mean);
-		System.out.println("variance: " + variance);
-		for (int i = 0; i < data.length; i++) {
-			data[i] = mean + rand.nextGaussian() * variance;
-			//System.out.println(data[i]);
-		}
-		*/
-		
+		ArrayList<Integer> data = new ArrayList<Integer>();
+		int[] temp = null;
+
 		
 //		int central = 100;
 //		for(int i = 0; i < populationSize; i++){
@@ -45,37 +34,12 @@ public class NormalStrategy extends GenerationStrategy{
 		
 		// Collections.sort(data);
 		
-		double[] data2 = new double[data.size()];
+		int[] data2 = new int[data.size()];
 		for (int i = 0; i < data.size(); i++) {
 			data2[i] = data.get(i);
 		}
 		
 		return temp;
-		
-		/*
-		double[] data = new double[populationSize];
-		double[] temp = null; 
-		int central = 100;
-		for(int i = 0; i < populationSize; i++){
-			temp = generateRandom(central, lowerBound, upperBound);
-			data[i] = getMean(temp);
-		}
-		return data;
-		*/
-		/*
-		double mean = 100;
-		double variance = 5;
-		double[] data = new double[populationSize];
-		Random rand = new Random();
-		for (int i = 0; i < data.length; i++) {
-			//data[i] = mean + rand.nextGaussian() * variance;
-			data[i] = rand.nextGaussian();
-			System.out.println(data[i]);
-		}
-		
-		System.out.println("Mean: " + getMean(data));
-		return data;
-		*/
 	}
 	
 	private double getVariance(double[] temp, double mean) {
@@ -94,11 +58,11 @@ public class NormalStrategy extends GenerationStrategy{
 		return sum / data.length;
 	}
 	
-	private double[] generateRandom(int central, int lowerBound, int upperBound) {
+	private int[] generateRandom(int central, int lowerBound, int upperBound) {
 		Random rand = new Random();
-		double[] data = new double[central];
+		int[] data = new int[central];
 		for(int i = 0; i < central; i++)
-			data[i] = (double)lowerBound + rand.nextInt(upperBound - lowerBound + 1) /*rand.nextDouble() * (upperBound - lowerBound) */ ;
+			data[i] = lowerBound + rand.nextInt(upperBound - lowerBound + 1) /*rand.nextDouble() * (upperBound - lowerBound) */ ;
 		
 		return data;
 	}
