@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 import org.paukov.combinatorics.ICombinatoricsVector;
 
 public class Sample {
@@ -18,7 +20,20 @@ public class Sample {
 		for(int i = 0; i < data.getSize(); i++)
 			sum += data.getValue(i);
 		mean = (double)sum / data.getSize();
-		System.out.println("mean: "+ mean + "\n");
+	}
+	
+	public String toString(){
+		String result = "";
+		List<Double> current;
+		for (int i = 0; i < data.getSize(); i++){
+			result += "double["+i+"] = ";
+			current = data.getVector();
+			for (Double d : current)
+				result += "["+d.toString()+"]";
+			result += "\n";
+		}
+		result += "mean is: " + mean;
+		return result;
 	}
 
 	public int getSampleSize() {
@@ -60,4 +75,6 @@ public class Sample {
 	public void setMeanFrequency(int frequency) {
 		this.meanFrequency = frequency;
 	}
+	
+	
 }

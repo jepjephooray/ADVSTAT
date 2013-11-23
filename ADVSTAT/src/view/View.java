@@ -154,12 +154,8 @@ public class View extends JFrame implements ChangeListener, KeyListener, ActionL
 		}
 	}
 	
-	public void UpdatePopulationGraph(double[][] data){
-		CategoryDataset dataset = DatasetUtilities.createCategoryDataset(
-	            "Series ", "", data
-	        );
+	public void UpdatePopulationGraph(CategoryDataset dataset){
 	        mainPanel.updatePopulationDomain(dataset);
-	        table.updateTable(data);
 	}
 
 	

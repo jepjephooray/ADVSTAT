@@ -11,7 +11,7 @@ import controller.Controller;
 public class Driver {
 	
 	public static void main(String args[]) {
-		//View view = new View();
+		View view = new View();
 		Model model = new Model();
 		//Hashtable<String, Integer> freqTable = model.getPopulationFrequencyTable();
 		//System.out.println();
@@ -27,7 +27,7 @@ public class Driver {
 		
 		//Controller controller = new Controller(model, view);
 		// controller.display();
-		// Controller controller = new Controller(model, view);
+		Controller controller = new Controller(model, view);
 		
 		//new Parameters(n, N, u, l, type)
 

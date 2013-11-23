@@ -44,12 +44,16 @@ public class Population {
 		Generator<Double> generator = Factory.createPermutationWithRepetitionGenerator(initialVector, sampleSize);
 		
 		for(ICombinatoricsVector<Double> permutation : generator) {
-			System.out.println(permutation);
-			listOfSamples.add(new Sample(sampleSize, permutation));
+			Sample s = new Sample(sampleSize, permutation);
+			listOfSamples.add(s);
 		}
 		
 		
 		
+	}
+
+	public ArrayList<Sample> getListOfSamples() {
+		return listOfSamples;
 	}
 
 	public double[] getData() {

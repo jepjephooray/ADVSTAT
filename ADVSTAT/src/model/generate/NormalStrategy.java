@@ -28,18 +28,24 @@ public class NormalStrategy extends GenerationStrategy{
 			//System.out.println(data[i]);
 		}
 		*/
-		int central = 10;
-		for(int i = 0; i < populationSize; i++){
-			temp = generateRandom(central, lowerBound, upperBound);
-			data.add(getMean(temp));
-		}
-		Collections.sort(data);
 		
-		double[] data2 = new double[data.size()];
-		for (int i = 0; i < data.size(); i++) {
-			data2[i] = data.get(i);
-			System.out.println(data2[i]);
+		double[] data2 = new double[(upperBound-lowerBound+1)];
+		for (int i = lowerBound; i <= upperBound; i++){
+			data2[i-lowerBound] = i;
 		}
+//		
+//		int central = 100;
+//		for(int i = 0; i < populationSize; i++){
+//			temp = generateRandom(central, lowerBound, upperBound);
+//			data.add(getMean(temp));
+//		}
+//		
+//		// Collections.sort(data);
+//		
+//		double[] data2 = new double[data.size()];
+//		for (int i = 0; i < data.size(); i++) {
+//			data2[i] = data.get(i);
+//		}
 		
 		return data2;
 		
@@ -89,7 +95,7 @@ public class NormalStrategy extends GenerationStrategy{
 		Random rand = new Random();
 		double[] data = new double[central];
 		for(int i = 0; i < central; i++)
-			data[i] = (double)lowerBound + /*rand.nextInt(upperBound - lowerBound)*/ rand.nextDouble() * (upperBound - lowerBound);
+			data[i] = (double)lowerBound + rand.nextInt(upperBound - lowerBound) /*rand.nextDouble() * (upperBound - lowerBound) */ ;
 		
 		return data;
 	}

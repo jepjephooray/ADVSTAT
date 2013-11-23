@@ -3,7 +3,10 @@ package model;
 import java.text.Bidi;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.List;
+import java.util.Map.Entry;
 import java.util.Random;
 
 import model.generate.BimodalStrategy;
@@ -13,7 +16,9 @@ import model.generate.RandomStrategy;
 import model.generate.SkewedStrategy;
 import model.generate.UniformStrategy;
 
+import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DatasetUtilities;
 import org.paukov.combinatorics.Factory;
 import org.paukov.combinatorics.Generator;
 import org.paukov.combinatorics.ICombinatoricsVector;
@@ -136,18 +141,30 @@ public class Model {
 	}
 
 	*/ 
-	public double[][] getPopulationFrequencyTable() {
-		double[][] frequencyTable = new double[1][populationSize];
+	public CategoryDataset getPopulationFrequencyTable() {
+		ArrayList<Sample> listOfSamples = population.getListOfSamples();
+		HashMap<String, Integer> data = new HashMap<String, Integer>();
+		for(Sample currentSample : listOfSamples){
+			double mean = currentSample.getMean();
+			if (data.containsKey(""+mean)){
+				data.put(""+mean, data.get(""+mean) + 1);
+			}else{
+				data.put(""+mean, 1);
+			}
+		}
 		
-		double[] data = population.getData();
-		ArrayList<Double> dobol = primitiveToObject(data); 
-		Collections.sort(dobol);
-		Double[] array = dobol.toArray(new Double[dobol.size()]);
+		List<String> keys = new ArrayList<String>(data.keySet());
+		Collections.sort(keys);
+		DefaultCategoryDataset mySeries= new DefaultCategoryDataset();
+		for(String key : keys) {
+			double d = data.get(key);
+			double totalsize = keys.size();
+			double probability = d / totalsize;
+			mySeries.addValue(probability, "Mean", key);
+		}
 		
-		for (int i = 0; i < array.length; i++)
-			frequencyTable[0][i] = array[i];
 		
-		return frequencyTable;
+		return mySeries;
 	}
 	
 	private ArrayList<Double> primitiveToObject(double[] data) {
