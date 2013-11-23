@@ -81,7 +81,8 @@ public class Population {
 		
 		ArrayList<Integer> dataList = strategy.FindAllSamplePermutations(data);
 		ICombinatoricsVector<Integer> initialVector = Factory.createVector(dataList); 
-		Generator<Integer> generator = Factory.createPermutationWithRepetitionGenerator(initialVector, sampleSize);
+		Generator<Integer> generator = Factory.createMultiCombinationGenerator(initialVector, sampleSize);
+		//Generator<Integer> generator = Factory.createPermutationWithRepetitionGenerator(initialVector, sampleSize);
 		
 		listOfSamples = new ArrayList<Sample>();
 		double totalMean = 0;

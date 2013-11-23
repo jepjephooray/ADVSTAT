@@ -22,12 +22,10 @@ public class SkewedStrategy extends GenerationStrategy{
 			data.add(lowerBound + rand.nextInt(upperBound - lowerBound + 1));
 		}
 		if(rand.nextBoolean()) {
-			System.out.println("1st half of bounds");
 			for(; i < populationSize; i++)
 				data.add(lowerBound + rand.nextInt( (upperBound - lowerBound)/2 + 1));
 		}
 		else {
-			System.out.println("2nd half of bounds");
 			for(; i < populationSize; i++)
 				data.add(lowerBound + (upperBound - lowerBound)/2 + rand.nextInt( (upperBound - lowerBound)/2 + 1));
 		}
