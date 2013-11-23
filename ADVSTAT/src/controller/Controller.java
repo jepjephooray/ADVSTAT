@@ -2,6 +2,7 @@ package controller;
 
 import model.Model;
 import view.GraphUpdateEvent;
+import view.GraphUpdateEvent.UpdateType;
 import view.GraphUpdateListener;
 import view.Parameters;
 import view.View;
@@ -21,9 +22,17 @@ public class Controller implements GraphUpdateListener {
 	@Override
 	public void updatePerformed(GraphUpdateEvent e) {
 		Parameters param = e.getParameters();
-		model.Initialize(param);
-		view.UpdateSampleGraph(model.getSampleFrequencyTable());
-		view.UpdatePopulationGraph(model.getPopulationFrequencyTable());
+		
+		if (e.getType() == UpdateType.Population){
+			model.Initialize(param);
+			view.UpdatePopulationGraph(model.getPopulationFrequencyTable());
+			view.InitializePopulationInformation(model.getPopulation());
+		}else {
+			model.changeSampleSize(param);
+			view.UpdateSampleGraph(model.getSampleFrequencyTable());
+			view.InitializeSampleInformation(model.getPopulation());
+		}
+		
 	}
 
 	

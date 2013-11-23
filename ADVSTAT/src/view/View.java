@@ -19,16 +19,19 @@ import javax.swing.event.ChangeListener;
 
 
 import model.Model.GenerationType;
+import model.Population;
 import model.Sample;
 
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetUtilities;
 
+import view.GraphUpdateEvent.UpdateType;
+
 
 
 public class View extends JFrame implements ChangeListener, KeyListener, ActionListener{
 	MainPanel mainPanel;
-	ViewTable table;
+	ViewInformation viewInformation;
 	private GraphUpdateListener listener;
 	private static final boolean HideParameterPanelWhenError = true;
 	
@@ -71,8 +74,8 @@ public class View extends JFrame implements ChangeListener, KeyListener, ActionL
         tabbedPane.addTab("Graph", panel1);
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
          
-        JComponent panel2 = table = new ViewTable();
-        tabbedPane.addTab("Table", panel2);
+        JComponent panel2 = viewInformation = new ViewInformation();
+        tabbedPane.addTab("Information", panel2);
         tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
         
         add(tabbedPane);
@@ -139,11 +142,12 @@ public class View extends JFrame implements ChangeListener, KeyListener, ActionL
 			parameterPanel.setSample(Sample.Size);
 			parameterPanel.updatePopulation(N);
 			parameterPanel.updateSample(Sample.Size);
-			
+			UpdateType type = parameterPanel.getType(src);
 			if (parameterPanel.isInputValid() && parameterPanel.shouldDisplayGraph()){
 				Parameters newParam = new Parameters(Sample.Size, N, u, l, parameterPanel.getGenerationType());
 				if (HideParameterPanelWhenError)parameterPanel.sliderPanel.setVisible(true);
-				listener.updatePerformed(new GraphUpdateEvent(src, newParam));
+				
+				listener.updatePerformed(new GraphUpdateEvent(src, newParam, type));
 			}
 		} catch(Exception e) {
 			if (HideParameterPanelWhenError)parameterPanel.sliderPanel.setVisible(false);
@@ -153,6 +157,7 @@ public class View extends JFrame implements ChangeListener, KeyListener, ActionL
 		}
 	}
 	
+	
 	public void UpdatePopulationGraph(CategoryDataset dataset){
 	        mainPanel.updatePopulationDomain(dataset);
 	}
@@ -160,6 +165,14 @@ public class View extends JFrame implements ChangeListener, KeyListener, ActionL
 	public void UpdateSampleGraph(CategoryDataset dataset) {
 		mainPanel.updateSamplingDomain(dataset);
 		
+	}
+
+	public void InitializeSampleInformation(Population population){
+		viewInformation.InitializeSampleInformation(population);
+	}	
+	
+	public void InitializePopulationInformation(Population population) {
+		viewInformation.InitializePopulationInformation(population);
 	}
 
 	

@@ -1,4 +1,4 @@
-package view;
+package bobby;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.text.DecimalFormat;

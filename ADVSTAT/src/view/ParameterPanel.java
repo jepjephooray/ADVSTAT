@@ -18,6 +18,8 @@ import model.Model.GenerationType;
 
 import org.jdesktop.swingx.JXFormattedTextField;
 
+import view.GraphUpdateEvent.UpdateType;
+
 public class ParameterPanel extends JPanel{
 	public static final int DEFAULT_N = 1;
 	public static final int MAX_N = 5;
@@ -45,7 +47,7 @@ public class ParameterPanel extends JPanel{
 		Dimension lblSize = new Dimension(20, 50);
 		Dimension txtSize = new Dimension(70, 30);
 		Dimension lblLongSize = new Dimension(100, 30);
-		Dimension lblLongerSize = new Dimension(190, 30);
+		Dimension lblLongerSize = new Dimension(200, 30);
 		
 		txtN = new JXFormattedTextField("Population size");
 		txtN.setPreferredSize(txtSize);
@@ -96,8 +98,8 @@ public class ParameterPanel extends JPanel{
 		btnGenerate.setPreferredSize(lblLongerSize);
 		formPanel.add(btnGenerate);
 		
-		btnGraph = new JButton("Graph");
-		btnGraph.setPreferredSize(lblLongSize);
+		btnGraph = new JButton("Graph the sampling");
+		btnGraph.setPreferredSize(lblLongerSize);
 		formPanel.add(btnGraph);
 		
 
@@ -136,6 +138,7 @@ public class ParameterPanel extends JPanel{
 		sliderSampleSize.setPaintTicks(true);
 		sliderSampleSize.setPreferredSize(new Dimension(750, 30));
 		sliderSampleSize.setValue(2);
+		sliderSampleSize.setMinimum(2);
 		sliderContainerSampleSize.add(sliderSampleSize);
 		
 		sliderPanel = new JPanel();
@@ -195,11 +198,15 @@ public class ParameterPanel extends JPanel{
 	}
 	
 	public int getUpperB() throws Exception{
+		if (txtUpperB.getText().equalsIgnoreCase(""))
+			throw new Exception("No upper bound.");
 		int value = Integer.parseInt(txtUpperB.getText());
 		return value;
 	}
 	
 	public int getLowerB() throws Exception{
+		if (txtLowerB.getText().equalsIgnoreCase(""))
+			throw new Exception("No lower bound.");
 		int value = Integer.parseInt(txtLowerB.getText());
 		return value;
 	}
@@ -264,6 +271,7 @@ public class ParameterPanel extends JPanel{
 		sliderPopulationSize.addChangeListener(listener);
 		sliderSampleSize.addChangeListener(listener);
 		btnGenerate.addActionListener(listener);
+		btnGraph.addActionListener(listener);
 	}
 
 	public GenerationType getGenerationType() {
@@ -281,6 +289,11 @@ public class ParameterPanel extends JPanel{
 	public void setError(String message) {
 		lblError.setVisible(true);
 		lblError.setText(message);
+	}
+
+	public UpdateType getType(Object src) {
+		if (src.equals(btnGenerate)) return UpdateType.Population;
+		return UpdateType.Sample;
 	}
 
 
