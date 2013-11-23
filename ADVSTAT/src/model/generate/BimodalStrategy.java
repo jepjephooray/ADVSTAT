@@ -22,15 +22,12 @@ public class BimodalStrategy extends GenerationStrategy{
 			if(i < populationSize/2) {
 				temp = generateRandom(central, lowerBound, (lowerBound + upperBound)/2);
 				data.add(getMean(temp));
-				System.out.print("first: ");
 			}
 			else {
 				temp = generateRandom(central, lowerBound, upperBound);
 				data.add(getMean(temp));
-				System.out.print("2nd: ");
 			}
 			
-			System.out.println(data.get(i));
 		}
 		
 		Collections.sort(data);
@@ -38,7 +35,6 @@ public class BimodalStrategy extends GenerationStrategy{
 		int[] data2 = new int[data.size()];
 		for (int i = 0; i < data.size(); i++) {
 			data2[i] = data.get(i);
-			System.out.println(data2[i]);
 		}
 		
 		return data2;

@@ -20,7 +20,6 @@ public class UniformStrategy extends GenerationStrategy{
 			adder++;
 			if(lowerBound + adder > upperBound)
 				adder = 0;
-			System.out.println(data[i]);
 		}
 		return data;
 	}

@@ -36,7 +36,6 @@ public class SkewedStrategy extends GenerationStrategy{
 		int[] data2 = new int[data.size()];
 		for(int j = 0; j < data.size(); j++) {
 			data2[j] = data.get(j);
-			System.out.println(data2[j]);
 		}
 		return data2;
 	}
