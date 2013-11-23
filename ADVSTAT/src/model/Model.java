@@ -150,12 +150,13 @@ public class Model {
 	 * the category dataset.
 	 * @return The category dataset to be used for graphing.
 	 */
-	public CategoryDataset getPopulationFrequencyTable() {
+	public CategoryDataset getSampleFrequencyTable() {
 		
 		// Get the samples
 		ArrayList<Sample> listOfSamples = population.getListOfSamples();
 		
 		// Create a way to count the frequencies of the mean
+		int total = 0;
 		HashMap<Double, Integer> data = new HashMap<Double, Integer>();
 		for(Sample currentSample : listOfSamples){
 			double mean = currentSample.getMean();
@@ -164,6 +165,7 @@ public class Model {
 			}else{
 				data.put(mean, 1);
 			}
+			++total;
 		}
 		
 		// Sort the keys
@@ -174,8 +176,9 @@ public class Model {
 		// for each key, get the probability of the sample occuring
 		for(Double key : keys) {
 			double d = data.get(key);
-			double totalsize = keys.size();
-			double probability = d / totalsize;
+			double probability = d / total;
+			if (probability > 1)
+				System.err.println("Why is the probability greater than 1");
 			// Add to the category data set
 			mySeries.addValue(probability, "Mean", key);
 		}
@@ -183,12 +186,8 @@ public class Model {
 		return mySeries;
 	}
 	
-	private ArrayList<Double> primitiveToObject(double[] data) {
-		ArrayList<Double> data2 = new ArrayList<Double>();
-		if (data != null)
-			for (int i = 0; i < data.length; i++) {
-				data2.add(new Double(data[i]));
-			}
-		return data2;
+	public CategoryDataset getPopulationFrequencyTable() {
+		// Work on the population now, instead of the list of samples
+		return null;
 	}
 }

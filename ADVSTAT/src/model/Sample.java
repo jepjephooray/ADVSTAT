@@ -6,8 +6,8 @@ import org.paukov.combinatorics.ICombinatoricsVector;
 
 public class Sample {
 	
-	public static int Size;
 	ICombinatoricsVector<Double> data;
+	public static int Size;
 	int sampleSize, meanFrequency;
 	double mean, meanRelativeFrequency;
 	

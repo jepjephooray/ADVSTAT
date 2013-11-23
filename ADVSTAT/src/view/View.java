@@ -132,7 +132,7 @@ public class View extends JFrame implements ChangeListener, KeyListener, ActionL
 			parameterPanel.clearErrors();
 			int u = parameterPanel.getUpperB();
 			int l = parameterPanel.getLowerB();
-			int N, n;
+			int N;
 
 			N = parameterPanel.getN();
 			parameterPanel.setPopulation(N);
@@ -156,6 +156,11 @@ public class View extends JFrame implements ChangeListener, KeyListener, ActionL
 	
 	public void UpdatePopulationGraph(CategoryDataset dataset){
 	        mainPanel.updatePopulationDomain(dataset);
+	}
+
+	public void UpdateSampleGraph(CategoryDataset dataset) {
+		mainPanel.updateSamplingDomain(dataset);
+		
 	}
 
 	

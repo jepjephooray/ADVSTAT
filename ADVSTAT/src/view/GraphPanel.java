@@ -55,18 +55,10 @@ public class GraphPanel extends JPanel{
 
 	  public static JFreeChart generateBarChart(DefaultCategoryDataset dataset, String title) {
 	        DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
-	        dataSet.setValue(5, "Population", "1");
-	        dataSet.setValue(7, "Population", "2");
-	        dataSet.setValue(12, "Population", "3");
-	        dataSet.setValue(15, "Population", "4");
-	        dataSet.setValue(14, "Population", "5");
-	        dataSet.setValue(6, "Population", "6");
-	        dataSet.setValue(3, "Population", "7");
-	        dataSet.setValue(1, "Population", "8");
 	        
 	        
 	     final JFreeChart chart = ChartFactory.createBarChart(
-	                title, "Sample mean", "Frequency",
+	                title, "Sample mean", "Probability",
 	                dataSet, PlotOrientation.VERTICAL, false, true, false);
 	     
 	     

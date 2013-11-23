@@ -126,6 +126,7 @@ public class ParameterPanel extends JPanel{
 		sliderSampleSize.setMinorTickSpacing(5);
 		sliderSampleSize.setPaintTicks(true);
 		sliderSampleSize.setPreferredSize(new Dimension(750, 30));
+		sliderSampleSize.setValue(2);
 		sliderContainerSampleSize.add(sliderSampleSize);
 		
 		sliderPanel = new JPanel();
@@ -264,7 +265,7 @@ public class ParameterPanel extends JPanel{
 		if (n > sliderPopulationSize.getValue())
 			n = sliderPopulationSize.getValue();
 		else if (n < 0)
-			n = 1;
+			n = 2;
 		
 		sliderSampleSize.setValue(n);
 		
