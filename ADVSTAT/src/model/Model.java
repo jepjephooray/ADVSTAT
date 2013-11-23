@@ -2,6 +2,7 @@ package model;
 
 import java.text.Bidi;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -19,6 +20,7 @@ import model.generate.UniformStrategy;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DatasetUtilities;
+import org.jfree.util.ArrayUtilities;
 import org.paukov.combinatorics.Factory;
 import org.paukov.combinatorics.Generator;
 import org.paukov.combinatorics.ICombinatoricsVector;
@@ -189,12 +191,20 @@ public class Model {
 	public CategoryDataset getPopulationFrequencyTable() {
 		double[] data = population.getData();
 		
+		// Move to array list
+		ArrayList<Double> list = new ArrayList<Double>();
+		for(int i = 0; i < data.length; i++) {
+			list.add(data[i]);
+		}
+		
+		// Collections.sort(list);
+		
 		DefaultCategoryDataset mySeries = new DefaultCategoryDataset();
 		
 		// for each key, get the probability of the sample's occurrence
-		for(int i = 0; i < data.length; i++) {
-			double d = data[i];
-			mySeries.addValue(d, "Mean", ""+d);
+		for(int i = 0; i < list.size();) {
+			double d = list.get(i);
+			mySeries.addValue(d, "Data", "" + ++i);
 		}
 		
 		return mySeries;

@@ -32,10 +32,15 @@ public class NormalStrategy extends GenerationStrategy{
 		*/
 		
 		
-		int central = 100;
-		for(int i = 0; i < populationSize; i++){
-			temp = generateRandom(central, lowerBound, upperBound);
-			data.add(getMean(temp));
+//		int central = 100;
+//		for(int i = 0; i < populationSize; i++){
+//			
+//			data.add(getMean(temp));
+//		}
+//		
+		temp = generateRandom(populationSize, lowerBound, upperBound);
+		for(int i = 0; i < populationSize; i++){	
+			data.add(temp[i]);
 		}
 		
 		// Collections.sort(data);
@@ -45,7 +50,7 @@ public class NormalStrategy extends GenerationStrategy{
 			data2[i] = data.get(i);
 		}
 		
-		return data2;
+		return temp;
 		
 		/*
 		double[] data = new double[populationSize];
