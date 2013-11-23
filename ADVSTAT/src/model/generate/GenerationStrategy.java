@@ -9,6 +9,7 @@ public abstract class GenerationStrategy {
 	protected int populationSize;
 	protected int upperBound;
 	protected int lowerBound;
+	
 	public GenerationStrategy(Parameters param) {
 		super();
 		populationSize = param.getBigN();
@@ -56,5 +57,11 @@ public abstract class GenerationStrategy {
 			data[i-lowerBound] = i;
 		}
 		return data;
+	}
+	public int getSampleSize() {
+		return sampleSize;
+	}
+	public void setSampleSize(int sampleSize) {
+		this.sampleSize = sampleSize;
 	}
 }

@@ -209,4 +209,8 @@ public class Model {
 		
 		return mySeries;
 	}
+
+	public void changeSampleSize(Parameters param) {
+		population.Initialize(param);
+	}
 }

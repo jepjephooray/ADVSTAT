@@ -24,6 +24,8 @@ import model.Sample;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetUtilities;
 
+import view.GraphUpdateEvent.UpdateType;
+
 
 
 public class View extends JFrame implements ChangeListener, KeyListener, ActionListener{
@@ -139,11 +141,11 @@ public class View extends JFrame implements ChangeListener, KeyListener, ActionL
 			parameterPanel.setSample(Sample.Size);
 			parameterPanel.updatePopulation(N);
 			parameterPanel.updateSample(Sample.Size);
-			
+			UpdateType type = parameterPanel.getType(src);
 			if (parameterPanel.isInputValid() && parameterPanel.shouldDisplayGraph()){
 				Parameters newParam = new Parameters(Sample.Size, N, u, l, parameterPanel.getGenerationType());
 				if (HideParameterPanelWhenError)parameterPanel.sliderPanel.setVisible(true);
-				listener.updatePerformed(new GraphUpdateEvent(src, newParam));
+				listener.updatePerformed(new GraphUpdateEvent(src, newParam, type));
 			}
 		} catch(Exception e) {
 			if (HideParameterPanelWhenError)parameterPanel.sliderPanel.setVisible(false);
