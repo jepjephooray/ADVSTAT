@@ -213,4 +213,8 @@ public class Model {
 	public void changeSampleSize(Parameters param) {
 		population.Initialize(param);
 	}
+
+	public Population getPopulation() {
+		return population;
+	}
 }

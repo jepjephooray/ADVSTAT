@@ -26,10 +26,13 @@ public class Controller implements GraphUpdateListener {
 		if (e.getType() == UpdateType.Population){
 			model.Initialize(param);
 			view.UpdatePopulationGraph(model.getPopulationFrequencyTable());
+			view.InitializePopulationInformation(model.getPopulation());
 		}else {
 			model.changeSampleSize(param);
 			view.UpdateSampleGraph(model.getSampleFrequencyTable());
+			view.InitializeSampleInformation(model.getPopulation());
 		}
+		
 	}
 
 	

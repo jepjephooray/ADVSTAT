@@ -14,7 +14,14 @@ import model.generate.GenerationStrategy;
 public class Population {
 	private int[] data;
 	private ArrayList<Sample> listOfSamples;
+	
 	private int sampleSize;
+	private double sampleMean;
+	private double sampleVariance;
+	
+	private int populationSize;
+	private double mean;
+	private double variance;
 	private GenerationStrategy strategy;
 	
 	public Population(GenerationStrategy strategy, Parameters param) {
@@ -24,6 +31,10 @@ public class Population {
 		 */
 		this.strategy = strategy;
 		data = strategy.GeneratePopulation();
+		mean = getMean(data);
+		variance = getVariance(data, mean);
+		populationSize = param.getBigN();
+		
 		listOfSamples = new ArrayList<Sample>();
 		Initialize(param);
 	
@@ -35,6 +46,31 @@ public class Population {
 		
 	}
 	
+	private double getVariance(int[] data, double mean) {
+		double variance = 0;
+		for (int i = 0; i < data.length; i++) {
+			variance += (data[i] - mean) * (data[i] - mean);
+		}
+		return variance / data.length;
+	}
+	
+	private double getVariance(double[] data, double mean) {
+		double variance = 0;
+		for (int i = 0; i < data.length; i++) {
+			variance += (data[i] - mean) * (data[i] - mean);
+		}
+		return variance / data.length;
+	}
+
+	private double getMean(int[] data) {
+		double sum = 0;
+		for (int i = 0; i < data.length; i++) {
+			sum += data[i];
+		}
+		return sum / data.length;
+	}
+	
+
 	public void Initialize(Parameters param){
 		/**
 		 * This part begins finding all the possible samples.
@@ -48,10 +84,20 @@ public class Population {
 		Generator<Integer> generator = Factory.createPermutationWithRepetitionGenerator(initialVector, sampleSize);
 		
 		listOfSamples = new ArrayList<Sample>();
+		double totalMean = 0;
+		
 		for(ICombinatoricsVector<Integer> permutation : generator) {
 			Sample s = new Sample(sampleSize, permutation);
+			totalMean += s.getMean();
 			listOfSamples.add(s);
 		}
+		
+		double[] meanOfSamples = new double[listOfSamples.size()];
+		for (int i = 0; i < listOfSamples.size(); i++)
+			meanOfSamples[i] = listOfSamples.get(i).getMean();
+		
+		sampleMean = totalMean / listOfSamples.size();
+		sampleVariance = getVariance(meanOfSamples, totalMean); 
 	}
 
 	public ArrayList<Sample> getListOfSamples() {
@@ -60,5 +106,33 @@ public class Population {
 
 	public int[] getData() {
 		return data;
+	}
+
+	public double getVariance() {
+		return variance;
+	}
+
+	public int getSampleSize() {
+		return sampleSize;
+	}
+
+	public GenerationStrategy getStrategy() {
+		return strategy;
+	}
+
+	public int getPopulationSize() {
+		return populationSize;
+	}
+
+	public double getMean() {
+		return mean;
+	}
+
+	public double getSampleMean() {
+		return sampleMean;
+	}
+
+	public double getSampleVariance() {
+		return sampleVariance;
 	}
 }
