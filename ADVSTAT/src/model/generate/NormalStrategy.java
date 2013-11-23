@@ -31,23 +31,19 @@ public class NormalStrategy extends GenerationStrategy{
 		}
 		*/
 		
-		double[] data2 = new double[(upperBound-lowerBound+1)];
-		for (int i = lowerBound; i <= upperBound; i++){
-			data2[i-lowerBound] = i;
+		
+		int central = 100;
+		for(int i = 0; i < populationSize; i++){
+			temp = generateRandom(central, lowerBound, upperBound);
+			data.add(getMean(temp));
 		}
-//		
-//		int central = 100;
-//		for(int i = 0; i < populationSize; i++){
-//			temp = generateRandom(central, lowerBound, upperBound);
-//			data.add(getMean(temp));
-//		}
-//		
-//		// Collections.sort(data);
-//		
-//		double[] data2 = new double[data.size()];
-//		for (int i = 0; i < data.size(); i++) {
-//			data2[i] = data.get(i);
-//		}
+		
+		// Collections.sort(data);
+		
+		double[] data2 = new double[data.size()];
+		for (int i = 0; i < data.size(); i++) {
+			data2[i] = data.get(i);
+		}
 		
 		return data2;
 		

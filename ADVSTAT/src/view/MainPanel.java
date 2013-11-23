@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 
 import org.jfree.data.category.CategoryDataset;
 
+import view.GraphPanel.Type;
+
 public class MainPanel extends JPanel{
 	private GraphPanel populationGraphPanel;
 	private GraphPanel samplingGraphPanel;
@@ -17,10 +19,10 @@ public class MainPanel extends JPanel{
 		JPanel graphPanels = new JPanel();
 		graphPanels.setLayout(new BoxLayout(graphPanels, BoxLayout.Y_AXIS));
 		
-		GraphPanel.PopulationGraph = populationGraphPanel = new GraphPanel("Population Distribution");
+		GraphPanel.PopulationGraph = populationGraphPanel = new GraphPanel("Population Distribution", Type.Population);
 		graphPanels.add(populationGraphPanel);
 		
-		GraphPanel.SamplingGraph = samplingGraphPanel = new GraphPanel("Sampling Distribution");
+		GraphPanel.SamplingGraph = samplingGraphPanel = new GraphPanel("Sampling Distribution", Type.Sample);
 		graphPanels.add(samplingGraphPanel);
 	
 		parameterPanel = new ParameterPanel();
