@@ -11,7 +11,7 @@ public class RandomStrategy extends GenerationStrategy{
 		super(param);
 	}
 
-	public double[] Generate(){
+	public double[] GeneratePopulation(){
 		Random rand = new Random();
 		double[] data = new double[populationSize];
 		for(int i = 0; i < populationSize; i++)

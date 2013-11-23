@@ -23,6 +23,7 @@ public class Controller implements GraphUpdateListener {
 		Parameters param = e.getParameters();
 		model.Initialize(param);
 		view.UpdateSampleGraph(model.getSampleFrequencyTable());
+		view.UpdatePopulationGraph(model.getPopulationFrequencyTable());
 	}
 
 	

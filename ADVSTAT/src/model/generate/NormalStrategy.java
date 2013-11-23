@@ -12,8 +12,10 @@ public class NormalStrategy extends GenerationStrategy{
 	public NormalStrategy(Parameters param) {
 		super(param);
 	}
+	
+	
 
-	public double[] Generate(){
+	public double[] GeneratePopulation(){
 		//Random rand = new Random();
 		ArrayList<Double> data = new ArrayList<Double>();
 		double[] temp = null;

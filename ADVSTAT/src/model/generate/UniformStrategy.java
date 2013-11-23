@@ -22,7 +22,7 @@ public class UniformStrategy extends GenerationStrategy{
 		return data;
 	}*/
 	
-	public double[] Generate() {
+	public double[] GeneratePopulation() {
 		double[] data = new double[populationSize];
 		int adder = 0;
 		for (int i = 0; i < populationSize; i++) {

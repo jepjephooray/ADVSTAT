@@ -15,29 +15,29 @@ public class Population {
 	private double[] data;
 	private ArrayList<Sample> listOfSamples;
 	private int sampleSize;
-	private int populationSize;
-	private int upperBound;
-	private int lowerBound;
 	
 	public Population(GenerationStrategy strategy, Parameters param) {
-		data = strategy.Generate();
-		listOfSamples = new ArrayList<Sample>();
-		populationSize = param.getBigN();
-		sampleSize = param.getSmallN();
-		upperBound = param.getU();
-		lowerBound = param.getL();
-	
 		/**
-		 * Generates all the possible combinations
+		 * This method does the majority of generation 
+		 * of data in the population 
 		 */
+		data = strategy.GeneratePopulation();
+		listOfSamples = new ArrayList<Sample>();
+		sampleSize = param.getSmallN();
+	
 		if(data == null || data.length == 0){
 			System.err.println("Invalid: No data from the population.");
 			return;
 		}
 		
+		/**
+		 * This part begins finding all the possible samples.
+		 * This is used for the sampling distribution
+		 */
+		double[] samplePermutations = strategy.FindAllSamplePermutations();
 		ArrayList<Double> dataList = new ArrayList<Double>();
-		for (int i = 0; i < data.length; i++) {
-			dataList.add(data[i]);
+		for (int i = 0; i < samplePermutations.length; i++) {
+			dataList.add(samplePermutations[i]);
 		}
 		
 		ICombinatoricsVector<Double> initialVector = Factory.createVector(dataList); 
@@ -47,9 +47,6 @@ public class Population {
 			Sample s = new Sample(sampleSize, permutation);
 			listOfSamples.add(s);
 		}
-		
-		
-		
 	}
 
 	public ArrayList<Sample> getListOfSamples() {
@@ -58,9 +55,5 @@ public class Population {
 
 	public double[] getData() {
 		return data;
-	}
-
-	public void setData(double[] data) {
-		this.data = data;
 	}
 }

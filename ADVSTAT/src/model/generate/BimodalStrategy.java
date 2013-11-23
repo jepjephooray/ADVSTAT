@@ -13,7 +13,7 @@ public class BimodalStrategy extends GenerationStrategy{
 		super(param);
 	}
 
-	public double[] Generate(){
+	public double[] GeneratePopulation(){
 		
 		ArrayList<Double> data = new ArrayList<Double>();
 		double temp[] = null;

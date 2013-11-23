@@ -178,8 +178,7 @@ public class Model {
 		for(Double key : keys) {
 			double d = data.get(key);
 			double probability = d / total;
-			if (probability > 1)
-				System.err.println("Why is the probability greater than 1");
+			
 			// Add to the category data set
 			mySeries.addValue(probability, "Mean", key);
 		}
@@ -188,7 +187,16 @@ public class Model {
 	}
 	
 	public CategoryDataset getPopulationFrequencyTable() {
-		// Work on the population now, instead of the list of samples
-		return null;
+		double[] data = population.getData();
+		
+		DefaultCategoryDataset mySeries = new DefaultCategoryDataset();
+		
+		// for each key, get the probability of the sample's occurrence
+		for(int i = 0; i < data.length; i++) {
+			double d = data[i];
+			mySeries.addValue(d, "Mean", ""+d);
+		}
+		
+		return mySeries;
 	}
 }

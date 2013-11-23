@@ -13,7 +13,7 @@ public class SkewedStrategy extends GenerationStrategy{
 		super(param);
 	}
 
-	public double[] Generate(){
+	public double[] GeneratePopulation(){
 		Random rand = new Random();
 		ArrayList<Double> data = new ArrayList<Double>();
 		

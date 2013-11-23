@@ -16,5 +16,13 @@ public abstract class GenerationStrategy {
 		upperBound = param.getU();
 		lowerBound = param.getL();
 	}
-	public abstract double[] Generate();
+	public abstract double[] GeneratePopulation();
+	
+	public double[] FindAllSamplePermutations(){
+		double[] data = new double[(upperBound-lowerBound+1)];
+		for (int i = lowerBound; i <= upperBound; i++){
+			data[i-lowerBound] = i;
+		}
+		return data;
+	}
 }
