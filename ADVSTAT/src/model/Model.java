@@ -156,23 +156,23 @@ public class Model {
 		ArrayList<Sample> listOfSamples = population.getListOfSamples();
 		
 		// Create a way to count the frequencies of the mean
-		HashMap<String, Integer> data = new HashMap<String, Integer>();
+		HashMap<Double, Integer> data = new HashMap<Double, Integer>();
 		for(Sample currentSample : listOfSamples){
 			double mean = currentSample.getMean();
-			if (data.containsKey(""+mean)){
-				data.put(""+mean, data.get(""+mean) + 1);
+			if (data.containsKey(mean)){
+				data.put(mean, data.get(mean) + 1);
 			}else{
-				data.put(""+mean, 1);
+				data.put(mean, 1);
 			}
 		}
 		
 		// Sort the keys
-		List<String> keys = new ArrayList<String>(data.keySet());
+		List<Double> keys = new ArrayList<Double>(data.keySet());
 		Collections.sort(keys);
 		DefaultCategoryDataset mySeries= new DefaultCategoryDataset();
 		
 		// for each key, get the probability of the sample occuring
-		for(String key : keys) {
+		for(Double key : keys) {
 			double d = data.get(key);
 			double totalsize = keys.size();
 			double probability = d / totalsize;
