@@ -34,16 +34,11 @@ public class Population {
 		 * This part begins finding all the possible samples.
 		 * This is used for the sampling distribution
 		 */
-		double[] samplePermutations = strategy.FindAllSamplePermutations();
-		ArrayList<Double> dataList = new ArrayList<Double>();
-		for (int i = 0; i < samplePermutations.length; i++) {
-			dataList.add(samplePermutations[i]);
-		}
+		ArrayList<Integer> dataList = strategy.FindAllSamplePermutations();
+		ICombinatoricsVector<Integer> initialVector = Factory.createVector(dataList); 
+		Generator<Integer> generator = Factory.createPermutationWithRepetitionGenerator(initialVector, sampleSize);
 		
-		ICombinatoricsVector<Double> initialVector = Factory.createVector(dataList); 
-		Generator<Double> generator = Factory.createPermutationWithRepetitionGenerator(initialVector, sampleSize);
-		
-		for(ICombinatoricsVector<Double> permutation : generator) {
+		for(ICombinatoricsVector<Integer> permutation : generator) {
 			Sample s = new Sample(sampleSize, permutation);
 			listOfSamples.add(s);
 		}

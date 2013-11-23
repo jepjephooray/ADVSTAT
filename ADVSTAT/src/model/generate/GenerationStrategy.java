@@ -20,23 +20,22 @@ public abstract class GenerationStrategy {
 	
 	/**
 	 * WRONG WRONG WRONG
-	 * This is flawed. The sample permutations should not be from
-	 * the list of all possible values but from the generated 
-	 * population itself. 
+	 * This should return an array list of integers which 
+	 * contains all the possible values of the population.
 	 * @return
 	 */
-	public double[] FindAllSamplePermutations(){
-		ArrayList<Double> list = new ArrayList<Double>();
+	public ArrayList<Integer> FindAllSamplePermutations(){
+		ArrayList<Integer> list = new ArrayList<Integer>();
 		
 		/*
-		 * This is incorrect -- should return data[] which
-		 * contains all the possible values from the population
+		 * Pseudocode!
+		 * For loop through each element in the population
+		 * 		current value = X
+		 * 			if (X is not yet in the list) add X to list
 		 */
-		double[] data = new double[(upperBound-lowerBound+1)];
-		for (int i = lowerBound; i <= upperBound; i++){
-			data[i-lowerBound] = i;
-		}
-		return data;
+		
+		
+		return list;
 	}
 	
 	public double[] FindAllPermutations(){

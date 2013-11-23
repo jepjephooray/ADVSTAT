@@ -6,12 +6,12 @@ import org.paukov.combinatorics.ICombinatoricsVector;
 
 public class Sample {
 	
-	ICombinatoricsVector<Double> data;
+	ICombinatoricsVector<Integer> data;
 	public static int Size;
 	int sampleSize, meanFrequency;
 	double mean, meanRelativeFrequency;
 	
-	public Sample(int sampleSize, ICombinatoricsVector<Double> data) {
+	public Sample(int sampleSize, ICombinatoricsVector<Integer> data) {
 		this.data = data;
 		this.sampleSize = sampleSize;
 		
@@ -24,11 +24,11 @@ public class Sample {
 	
 	public String toString(){
 		String result = "";
-		List<Double> current;
+		List<Integer> current;
 		for (int i = 0; i < data.getSize(); i++){
 			result += "double["+i+"] = ";
 			current = data.getVector();
-			for (Double d : current)
+			for (Integer d : current)
 				result += "["+d.toString()+"]";
 			result += "\n";
 		}
@@ -44,11 +44,11 @@ public class Sample {
 		this.sampleSize = sampleSize;
 	}
 
-	public ICombinatoricsVector<Double> getData() {
+	public ICombinatoricsVector<Integer> getData() {
 		return data;
 	}
 
-	public void setData(ICombinatoricsVector<Double> data) {
+	public void setData(ICombinatoricsVector<Integer> data) {
 		this.data = data;
 	}
 
