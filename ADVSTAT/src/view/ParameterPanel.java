@@ -104,6 +104,7 @@ public class ParameterPanel extends JPanel{
 		lblError = new JLabel("");
 		lblError.setForeground(Color.red);
 		lblError.setPreferredSize(lblLongerSize);
+		lblError.setVisible(false);
 		formPanel.add(lblError);
 		
 

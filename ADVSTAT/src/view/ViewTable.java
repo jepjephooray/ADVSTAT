@@ -1,7 +1,6 @@
 package view;
-import java.awt.Graphics;
-import java.math.BigDecimal;
-import java.math.MathContext;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.text.DecimalFormat;
 import java.util.Vector;
 
@@ -9,8 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
-import org.jfree.data.category.CategoryDataset;
 
 
 public class ViewTable extends JPanel {
@@ -20,14 +17,11 @@ public class ViewTable extends JPanel {
 	private final Vector<String> columnNames;
 
 	public ViewTable(){
-		// Sample data 
+		setLayout(new FlowLayout(FlowLayout.CENTER));
 		Vector<Vector<String>> data = new Vector<Vector<String>>();
-		Vector<String> v;
-				
 		columnNames = new Vector<String>();
-		columnNames.add("Value of X");
-		columnNames.add("Probability");
-		columnNames.add("Cumulative probability");
+		columnNames.add("Element");
+		columnNames.add("Value");
 		
 		model = new DefaultTableModel(data, columnNames){
 			@Override
@@ -38,6 +32,7 @@ public class ViewTable extends JPanel {
 		table = new JTable(model);
 		
 		JScrollPane pane = new JScrollPane(table);
+		pane.setPreferredSize(new Dimension(850, 730));
 		
 		add(pane);		
 	}

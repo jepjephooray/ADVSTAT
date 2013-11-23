@@ -1,6 +1,8 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Paint;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -12,6 +14,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
@@ -45,8 +48,14 @@ public class GraphPanel extends JPanel{
 		final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		final JFreeChart chart = generateBarChart(dataset, title, type);
 		plot = chart.getCategoryPlot();
+		CategoryItemRenderer renderer = plot.getRenderer();
+		Color color = new Color(100, 141, 100);
+		renderer.setSeriesPaint(0, color);
+		renderer.setBasePaint(color);
+		renderer.setBaseOutlinePaint(color);
 		chart.setBackgroundPaint(getBackground());
 		final ChartPanel chartPanel = new ChartPanel(chart);
+		
 		add(chartPanel);
 	}
 
